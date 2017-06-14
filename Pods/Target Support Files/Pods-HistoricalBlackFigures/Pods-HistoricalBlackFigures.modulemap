@@ -1,0 +1,6 @@
+framework module Pods_HistoricalBlackFigures {
+  umbrella header "Pods-HistoricalBlackFigures-umbrella.h"
+
+  export *
+  module * { export * }
+}

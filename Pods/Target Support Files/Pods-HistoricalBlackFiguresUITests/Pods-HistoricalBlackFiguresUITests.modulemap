@@ -1,0 +1,6 @@
+framework module Pods_HistoricalBlackFiguresUITests {
+  umbrella header "Pods-HistoricalBlackFiguresUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
