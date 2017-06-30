@@ -15,6 +15,12 @@
 		842538601EEC126C0008166D /* Facts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425385F1EEC126C0008166D /* Facts.swift */; };
 		842538621EEC129A0008166D /* Figures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842538611EEC129A0008166D /* Figures.swift */; };
 		842538651EED9E010008166D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842538641EED9E010008166D /* TableViewController.swift */; };
+		843BCB7E1EF3032B00343004 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB7D1EF3032B00343004 /* SearchTableViewCell.swift */; };
+		843BCB801EF885F000343004 /* LifeSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB7F1EF885F000343004 /* LifeSummaryViewController.swift */; };
+		843BCB821EF8904200343004 /* AccomplishmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB811EF8904200343004 /* AccomplishmentsViewController.swift */; };
+		843BCB841EF8909200343004 /* FactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB831EF8909200343004 /* FactsViewController.swift */; };
+		843BCB861EF8910E00343004 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB851EF8910E00343004 /* GalleryViewController.swift */; };
+		843BCB881EF8DB6A00343004 /* SearchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BCB871EF8DB6A00343004 /* SearchedViewController.swift */; };
 		8481C0001EEA6F23005EB86F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481BFFF1EEA6F23005EB86F /* AppDelegate.swift */; };
 		8481C0021EEA6F23005EB86F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481C0011EEA6F23005EB86F /* HomeViewController.swift */; };
 		8481C0051EEA6F23005EB86F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8481C0031EEA6F23005EB86F /* Main.storyboard */; };
@@ -89,6 +95,12 @@
 		8425385F1EEC126C0008166D /* Facts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Facts.swift; path = Models/Facts.swift; sourceTree = "<group>"; };
 		842538611EEC129A0008166D /* Figures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Figures.swift; sourceTree = "<group>"; };
 		842538641EED9E010008166D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = Controllers/TableViewController.swift; sourceTree = "<group>"; };
+		843BCB7D1EF3032B00343004 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = Views/SearchTableViewCell.swift; sourceTree = "<group>"; };
+		843BCB7F1EF885F000343004 /* LifeSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LifeSummaryViewController.swift; path = Controllers/LifeSummaryViewController.swift; sourceTree = "<group>"; };
+		843BCB811EF8904200343004 /* AccomplishmentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccomplishmentsViewController.swift; path = Controllers/AccomplishmentsViewController.swift; sourceTree = "<group>"; };
+		843BCB831EF8909200343004 /* FactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactsViewController.swift; path = Controllers/FactsViewController.swift; sourceTree = "<group>"; };
+		843BCB851EF8910E00343004 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GalleryViewController.swift; path = Controllers/GalleryViewController.swift; sourceTree = "<group>"; };
+		843BCB871EF8DB6A00343004 /* SearchedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchedViewController.swift; path = Controllers/SearchedViewController.swift; sourceTree = "<group>"; };
 		8481BFFC1EEA6F23005EB86F /* HistoricalBlackFigures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HistoricalBlackFigures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8481BFFF1EEA6F23005EB86F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8481C0011EEA6F23005EB86F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
@@ -254,7 +266,12 @@
 		8481C0321EEA758B005EB86F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				843BCB811EF8904200343004 /* AccomplishmentsViewController.swift */,
+				843BCB831EF8909200343004 /* FactsViewController.swift */,
+				843BCB851EF8910E00343004 /* GalleryViewController.swift */,
 				8481C0011EEA6F23005EB86F /* HomeViewController.swift */,
+				843BCB7F1EF885F000343004 /* LifeSummaryViewController.swift */,
+				843BCB871EF8DB6A00343004 /* SearchedViewController.swift */,
 				842538641EED9E010008166D /* TableViewController.swift */,
 			);
 			name = Controllers;
@@ -273,6 +290,7 @@
 		8481C0341EEA75A7005EB86F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				843BCB7D1EF3032B00343004 /* SearchTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -663,11 +681,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843BCB7E1EF3032B00343004 /* SearchTableViewCell.swift in Sources */,
+				843BCB881EF8DB6A00343004 /* SearchedViewController.swift in Sources */,
 				8481C0021EEA6F23005EB86F /* HomeViewController.swift in Sources */,
+				843BCB821EF8904200343004 /* AccomplishmentsViewController.swift in Sources */,
 				842538651EED9E010008166D /* TableViewController.swift in Sources */,
 				842538601EEC126C0008166D /* Facts.swift in Sources */,
+				843BCB861EF8910E00343004 /* GalleryViewController.swift in Sources */,
 				8481C0001EEA6F23005EB86F /* AppDelegate.swift in Sources */,
+				843BCB801EF885F000343004 /* LifeSummaryViewController.swift in Sources */,
 				8425385E1EEC11F00008166D /* Accomplishments.swift in Sources */,
+				843BCB841EF8909200343004 /* FactsViewController.swift in Sources */,
 				8481C0081EEA6F23005EB86F /* HistoricalBlackFigures.xcdatamodeld in Sources */,
 				842538621EEC129A0008166D /* Figures.swift in Sources */,
 				842187B31EEDE6BC000836BC /* FiguresOperation.swift in Sources */,

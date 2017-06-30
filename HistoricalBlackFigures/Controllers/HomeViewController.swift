@@ -7,32 +7,41 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 import FirebaseDatabase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDisplayDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // @IBOutlets
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var datelabel: UILabel!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var lifeSpan: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var subTitle: UILabel!
     
     // Declare Classes
+    var figuresOperations = FiguresOperation()
+    var figures = [Figures]()
+    var filteredFigures = [Figures]()
     
     // Declare Variables
+    var databaseReference: FIRDatabaseReference!
+    
+    var isSearching = Bool()
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         getListOfFigures()
-        
-        checkForiPhoneSize()
         setHBFTitle()
-        setHBFPhoto()
-        setCurrentDate()
+        checkForiPhoneSize()
+        figuresOperations.setCurrentDate(datelabel: datelabel)
+        setSearchController()
         
         // DispatchQueue.global(qos: .default).async(execute: {() -> Void in
         //     self.startTimer()
@@ -45,43 +54,35 @@ class HomeViewController: UIViewController {
     }
     
     func setHBFTitle() {
+        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
+        lifeSpan.text = UserDefaults.standard.string(forKey: "lifeSpan")
         
-    }
-    
-    func setHBFPhoto() {
-        
-    }
-    
-    func setCurrentDate() {
-        var components: DateComponents? = Calendar.current.dateComponents([.day, .month, .year], from: Date())
-        let day: Int = (components?.day)!
-        let month: Int = (components?.month)!
-        let year: Int = (components?.year)!
-        datelabel.text = "\(Int(month)).\(Int(day)).\(Int(year))"
-        print("Date: ", datelabel)
+        // Stores figure name in data model
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let entitiy = Entity(context: context)
+        entitiy.name = subTitle.text
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func getListOfFigures() {
-        let databaseReference = FIRDatabase.database().reference()
+        databaseReference = FIRDatabase.database().reference()
         databaseReference.observe(FIRDataEventType.value, with: {
             (snapshot) in
-            print("snpashot", snapshot)
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
-                    if let figure = snap.value as? String {
-                        print("HBF - ", figure)
+                    if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let figure = Figures(key: key, dictionary: figureDictionary)
+                        self.figures.insert(figure, at: 0)
                     }
                 }
             }
+            print("List of figures: ", self.figures)
+            UserDefaults.standard.set(self.figures[4].figuresKey, forKey: "subTitle")
+            UserDefaults.standard.set(self.figures[4].lifeSpan, forKey: "lifeSpan")
+            UserDefaults.standard.set(self.figures[4].lifeSummary, forKey: "lifeSummary")
+            UserDefaults.standard.set(self.figures[4].accomplishments, forKey: "accomplishments")
         })
-    }
-    
-    func setSearchBarContentList() {
-        
-    }
-    
-    func searchTableList() {
-        
     }
     
     func checkForiPhoneSize() {
@@ -101,9 +102,90 @@ class HomeViewController: UIViewController {
     
     // MARK: - UITableView Delegate/DataSource
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredFigures.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! SearchTableViewCell
+        let figure: Figures
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            figure = filteredFigures[indexPath.row]
+            cell.isHidden = false
+        } else {
+            figure = figures[indexPath.row]
+        }
+        
+        cell.configureCell(figure)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "svcSegue", sender: indexPath)
+    }
     
     // MARK: - UISearchBarDelegate / UISearchDisplayDelegate
     
+    func setSearchController() {
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchTableView.tableHeaderView = searchController.searchBar
+        searchTableView.tableHeaderView?.backgroundColor = UIColor.clear
+        
+        searchController.searchBar.searchBarStyle = UISearchBarStyle.prominent
+        searchController.view.backgroundColor = UIColor.clear
+        searchController.searchBar.tintColor = UIColor.brown
+        searchController.searchBar.barTintColor = UIColor.clear
+        searchController.searchBar.backgroundColor = UIColor.clear
+        searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
+    }
+    
+    func setSearchBarContentList() {
+    }
+    
+    func searchTableList() {
+        
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredFigures = figures.filter({( figure : Figures) -> Bool in
+            return figure.figuresKey.lowercased().contains(searchText.lowercased())
+        })
+        searchTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!)
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        containerView.alpha = 0
+        gradientView.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        containerView.alpha = 1
+        gradientView.isHidden = true
+    }
+    
+    func dismissKeyboard() {
+        searchController.searchBar.resignFirstResponder()
+    }
     
     // MARK: - Navigation
     
@@ -112,6 +194,4 @@ class HomeViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-
-
 }

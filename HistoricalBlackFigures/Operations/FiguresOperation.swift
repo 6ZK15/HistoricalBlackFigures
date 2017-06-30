@@ -12,19 +12,46 @@ import FirebaseDatabase
 
 class FiguresOperation: NSObject {
     
-    func getListOfFigures() {
-        let databaseReference = FIRDatabase.database().reference()
+    // Declare Classes
+    var homeVC: HomeViewController!
+    
+    var databaseReference: FIRDatabaseReference!
+    
+    func getListOfFigures(figures: [Figures]) {
+        var figures = figures
+        databaseReference = FIRDatabase.database().reference()
         databaseReference.observe(FIRDataEventType.value, with: {
             (snapshot) in
-            print("snpashot", snapshot)
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
-                    if let figure = snap.value as? String {
-                        print("HBF - ", figure)
+                    if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let figure = Figures(key: key, dictionary: figureDictionary)
+                        figures.insert(figure, at: 0)
                     }
                 }
             }
+            print("List of figures: ", figures)
+            UserDefaults.standard.set(figures[4].figuresKey, forKey: "subTitle")
+            UserDefaults.standard.set(figures[4].lifeSpan, forKey: "lifeSpan")
+            UserDefaults.standard.set(figures[4].lifeSummary, forKey: "lifeSummary")
+            UserDefaults.standard.set(figures[4].accomplishments, forKey: "accomplishments")
         })
+    }
+    
+    func setCurrentDate(datelabel: UILabel) {
+        var components: DateComponents? = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        let day: Int = (components?.day)!
+        let month: Int = (components?.month)!
+        let year: Int = (components?.year)!
+        datelabel.text = "\(Int(month)).\(Int(day)).\(Int(year))"
+        print("Date: ", datelabel)
+        
+        // Stores date in data model
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        let entitiy = Entity(context: context)
+//        entitiy.date = datelabel.text
+//        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 
 }
