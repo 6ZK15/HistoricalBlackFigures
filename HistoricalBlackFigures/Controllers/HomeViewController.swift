@@ -37,9 +37,11 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        getListOfFigures()
+        //getListOfFigures()
         setHBFTitle()
         checkForiPhoneSize()
+        updateBlackFigure()
+        
         figuresOperations.setCurrentDate(datelabel: datelabel)
         setSearchController()
         
@@ -76,15 +78,57 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                         self.figures.insert(figure, at: 0)
                     }
                 }
+                
+                //Loop through figures dictionary. Select Random figure.
+                //Another Idea I was thinking was to loop through firebase and select a figure. Only thing i'm not sure about is that the random function will accept
+               
+                /*
+                for i in 0..<self.figures.count {
+                    //Use random function to randomly select a figure
+                    let randomFigure = Int(arc4random_uniform(UInt32(self.figures.count)))
+                    UserDefaults.standard.set(self.figures[randomFigure].figuresKey, forKey: "subTitle")
+                    UserDefaults.standard.set(self.figures[randomFigure].lifeSpan, forKey: "lifeSpan")
+                    UserDefaults.standard.set(self.figures[randomFigure].lifeSummary, forKey: "lifeSummary")
+                    UserDefaults.standard.set(self.figures[randomFigure].accomplishments, forKey: "accomplishments")
+                    
+                    //print the figure firebase's index
+                    print("Random Figure Number: ", randomFigure)
+                    self.viewDidLoad()
+                    self.viewWillAppear(true)
+                }
+ */
+                
+            
+ 
+                //THIS METHOD LOOPS THROUGH MORE BUT IT ENDED UP CRASHING TOO
+                
+                let index1 = Int(self.figures.count)
+                let randomFigure = Int(arc4random_uniform(UInt32(index1)))
+                UserDefaults.standard.set(self.figures[randomFigure].figuresKey, forKey: "subTitle")
+                UserDefaults.standard.set(self.figures[randomFigure].lifeSpan, forKey: "lifeSpan")
+                UserDefaults.standard.set(self.figures[randomFigure].lifeSummary, forKey: "lifeSummary")
+                UserDefaults.standard.set(self.figures[randomFigure].accomplishments, forKey: "accomplishments")
+                
+               print("Random Figure Number: ", randomFigure)
+                self.viewDidLoad()
+                self.viewWillAppear(true)
             }
-            print("List of figures: ", self.figures)
-            UserDefaults.standard.set(self.figures[4].figuresKey, forKey: "subTitle")
-            UserDefaults.standard.set(self.figures[4].lifeSpan, forKey: "lifeSpan")
-            UserDefaults.standard.set(self.figures[4].lifeSummary, forKey: "lifeSummary")
-            UserDefaults.standard.set(self.figures[4].accomplishments, forKey: "accomplishments")
+            //print("List of figures: ", self.figures)
+            
         })
     }
     
+    //FUNC JUST TO SEE IF THEE FIGURE CHANGES every 5 seconds. if it works just use it to put in amount of seconds in a day to update hbf
+        func updateBlackFigure() {
+        var timer = Timer()
+        var counter = 0
+        
+        counter = 0
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.getListOfFigures), userInfo: nil, repeats: true)
+            
+
+            
+    }
     func checkForiPhoneSize() {
         let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
         let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)

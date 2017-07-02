@@ -85,7 +85,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="1875 - 1950" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuM-BY-DwD" userLabel="Life Span">
-                                <rect key="frame" x="119" y="143.5" width="138.5" height="50.5"/>
+                                <rect key="frame" x="118.5" y="143.5" width="138.5" height="50.5"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -363,7 +363,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="trw-jz-Roi">
-                                <rect key="frame" x="16" y="167" width="344" height="385.5"/>
+                                <rect key="frame" x="16" y="167" width="342" height="385.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hbfTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="fB9-ct-3ae">
                                 <rect key="frame" x="20" y="35" width="335" height="32"/>
@@ -391,14 +391,14 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="1875 - 1950" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="vlF-Yo-cQj" userLabel="Life Span">
-                                <rect key="frame" x="119" y="155" width="138.5" height="32"/>
+                                <rect key="frame" x="118.5" y="155" width="138.5" height="32"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgl-oI-sav" userLabel="Date">
-                                <rect key="frame" x="226" y="586.5" width="134" height="50.5"/>
+                                <rect key="frame" x="224" y="586.5" width="134" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="134" id="6uS-Rw-atA"/>
                                 </constraints>
