@@ -26,6 +26,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     var figuresOperations = FiguresOperation()
     var figures = [Figures]()
     var filteredFigures = [Figures]()
+    var randomFigure = Int()
     
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
@@ -36,6 +37,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
         getListOfFigures()
         setHBFTitle()
@@ -54,9 +56,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     
     func setHBFTitle() {
-        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
-        lifeSpan.text = UserDefaults.standard.string(forKey: "lifeSpan")
-        
         // Stores figure name in data model
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entitiy = Entity(context: context)
@@ -66,6 +65,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     func getListOfFigures() {
         databaseReference = FIRDatabase.database().reference()
+        
+        databaseReference.child("_random").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
+            print("Random Figure: ", snapshot.value as! Int)
+            self.randomFigure = snapshot.value as! Int
+        })
+        
         databaseReference.observe(FIRDataEventType.value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -73,15 +80,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                     if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
                         let figure = Figures(key: key, dictionary: figureDictionary)
-                        self.figures.insert(figure, at: 0)
+                        self.figures.append(figure)
                     }
                 }
             }
             print("List of figures: ", self.figures)
-            UserDefaults.standard.set(self.figures[4].figuresKey, forKey: "subTitle")
-            UserDefaults.standard.set(self.figures[4].lifeSpan, forKey: "lifeSpan")
-            UserDefaults.standard.set(self.figures[4].lifeSummary, forKey: "lifeSummary")
-            UserDefaults.standard.set(self.figures[4].accomplishments, forKey: "accomplishments")
+            self.subTitle.text = self.figures[self.randomFigure].figuresKey
+            self.lifeSpan.text = self.figures[self.randomFigure].lifeSpan
+            UserDefaults.standard.set(self.figures[self.randomFigure].figuresKey, forKey: "figureKey")
         })
     }
     

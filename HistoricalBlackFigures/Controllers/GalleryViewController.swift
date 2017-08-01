@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class GalleryViewController: UIViewController {
     
@@ -21,6 +23,9 @@ class GalleryViewController: UIViewController {
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
+    
+    // Declare Variables
+    var databaseReference: FIRDatabaseReference!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entity = Entity()
@@ -53,8 +58,10 @@ class GalleryViewController: UIViewController {
     }
     
     func setHBFTitle() {
-        //        subTitle.text = entity.name
-        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        subTitle.text = figureKey
     }
     
     func backPressed() {

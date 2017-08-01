@@ -12,6 +12,9 @@ import FirebaseDatabase
 
 class FiguresOperation: NSObject {
     
+    //Declare Variables
+    var databaseDate: String!
+    
     // Declare Classes
     var homeVC: HomeViewController!
     
@@ -32,10 +35,6 @@ class FiguresOperation: NSObject {
                 }
             }
             print("List of figures: ", figures)
-            UserDefaults.standard.set(figures[4].figuresKey, forKey: "subTitle")
-            UserDefaults.standard.set(figures[4].lifeSpan, forKey: "lifeSpan")
-            UserDefaults.standard.set(figures[4].lifeSummary, forKey: "lifeSummary")
-            UserDefaults.standard.set(figures[4].accomplishments, forKey: "accomplishments")
         })
     }
     
@@ -46,6 +45,24 @@ class FiguresOperation: NSObject {
         let year: Int = (components?.year)!
         datelabel.text = "\(Int(month)).\(Int(day)).\(Int(year))"
         print("Date: ", datelabel)
+        
+        databaseReference = FIRDatabase.database().reference()
+        databaseReference.child("_currentDate").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            self.databaseDate = snapshot.value as! String
+            print("Database Date value: ", self.databaseDate)
+            
+            if datelabel.isEqual(self.databaseDate) {
+            
+            } else {
+                print("Dates do not match")
+                print("Current date: ", datelabel.text!)
+                self.databaseReference.child("_currentDate").setValue(datelabel.text!)
+                
+                let randomFigure = arc4random_uniform(6) + 1
+                self.databaseReference.child("_random").setValue(randomFigure)
+            }
+        })
         
         // Stores date in data model
 //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

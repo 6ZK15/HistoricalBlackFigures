@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class AccomplishmentsViewController: UIViewController {
     
@@ -23,6 +25,9 @@ class AccomplishmentsViewController: UIViewController {
     // Declare Classes
     var figuresOperations = FiguresOperation()
     
+    // Declare Variables
+    var databaseReference: FIRDatabaseReference!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entity = Entity()
     
@@ -32,7 +37,7 @@ class AccomplishmentsViewController: UIViewController {
         adjustBackBtn()
         
 //        getData()
-        setHBInfo()
+        setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
@@ -53,10 +58,11 @@ class AccomplishmentsViewController: UIViewController {
         }
     }
     
-    func setHBInfo() {
-        //        subTitle.text = entity.name
-        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
-        print(bioTextView)
+    func setHBFTitle() {
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        subTitle.text = figureKey
     }
     
     func backPressed() {

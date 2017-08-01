@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
-class FactsViewController: UIViewController {
+class FactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // @IBOutlets
     @IBOutlet weak var backBtn: UIButton!
@@ -17,11 +19,15 @@ class FactsViewController: UIViewController {
     @IBOutlet weak var backBtnWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var bg: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var factsTextView: UITextView!
+    @IBOutlet weak var factsTableView: UITableView!
     @IBOutlet weak var subTitle: UILabel!
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
+    var facts = [Facts]()
+    
+    // Declare Variables
+    var databaseReference: FIRDatabaseReference!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entity = Entity()
@@ -54,8 +60,30 @@ class FactsViewController: UIViewController {
     }
     
     func setHBFTitle() {
-        //        subTitle.text = entity.name
-        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        subTitle.text = figureKey
+    }
+    
+    func getFacts() {
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        
+        databaseReference.child(figureKey).observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    if let factsDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let fact = Facts(key: key, dictionary: factsDictionary)
+                        self.facts.insert(fact, at: 0)
+                    }
+                }
+                print("List of facts: ", self.facts)
+            }
+        })
     }
     
     func backPressed() {
@@ -76,6 +104,67 @@ class FactsViewController: UIViewController {
             backBtnHeightConstraint.constant = 24
             backBtn.updateConstraints()
         }
+    }
+    
+    // MARK: - UITableView Delegate/DataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+        
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        
+        databaseReference.child(figureKey).observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    if let factsDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let fact = Facts(key: key, dictionary: factsDictionary)
+                        self.facts.insert(fact, at: 0)
+                    }
+                }
+                print("List of facts: ", self.facts)
+                
+                if indexPath.row == 0 {
+                    cell.textLabel?.text = "Date of Birth:"
+                    cell.detailTextLabel?.text = self.facts[0].dob
+                } else if indexPath.row == 1 {
+                    cell.textLabel?.text = "Place of Birth:"
+                    cell.detailTextLabel?.text = self.facts[0].pob
+                } else if indexPath.row == 2 {
+                    cell.textLabel?.text = "Occupation:"
+                    cell.detailTextLabel?.text = self.facts[0].occupation
+                } else if indexPath.row == 3 {
+                    cell.textLabel?.text = "Education:"
+                    cell.detailTextLabel?.text = self.facts[0].education
+                } else if indexPath.row == 4 {
+                    cell.textLabel?.text = "Parents:"
+                    cell.detailTextLabel?.text = self.facts[0].parents
+                } else if indexPath.row == 5 {
+                    cell.textLabel?.text = "Date of Death:"
+                    cell.detailTextLabel?.text = self.facts[0].dod
+                } else if indexPath.row == 6 {
+                    cell.textLabel?.text = "Place of Death:"
+                    cell.detailTextLabel?.text = self.facts[0].pod
+                }
+            }
+        })
+        
+        return cell
     }
 
     /*

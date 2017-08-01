@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Firebase
+import FirebaseDatabase
 
 class LifeSummaryViewController: UIViewController {
     
@@ -25,6 +27,9 @@ class LifeSummaryViewController: UIViewController {
     var figuresOperations = FiguresOperation()
     var homeVC: HomeViewController!
     
+    // Declare Variables
+    var databaseReference: FIRDatabaseReference!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entity = Entity()
     
@@ -34,7 +39,8 @@ class LifeSummaryViewController: UIViewController {
 //        getData()
         adjustBackBtn()
         checkForSearchedFigure()
-        setHBFInfo()
+        setHBFTitle()
+        setBioTextView()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
@@ -55,13 +61,22 @@ class LifeSummaryViewController: UIViewController {
         }
     }
     
-    func setHBFInfo() {
-//        subTitle.text = entity.name
-        subTitle.text = UserDefaults.standard.string(forKey: "subTitle")
-        bioTextView.text = UserDefaults.standard.string(forKey: "lifeSummary")
+    func setHBFTitle() {
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        subTitle.text = figureKey
     }
     
     func setBioTextView() {
+        databaseReference = FIRDatabase.database().reference()
+        
+        let firgureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        
+        databaseReference.child(firgureKey).child("lifeSummary").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            self.bioTextView.text = snapshot.value as! String
+        })
         
     }
     
