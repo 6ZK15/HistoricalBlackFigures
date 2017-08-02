@@ -22,6 +22,7 @@ class LifeSummaryViewController: UIViewController {
     @IBOutlet weak var bg: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet var bannerView: GADBannerView!
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
@@ -42,15 +43,28 @@ class LifeSummaryViewController: UIViewController {
         setHBFTitle()
         setBioTextView()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
+        loadAd()
         
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
         navigationItem.leftBarButtonItem = backButton
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadAd()
+    {
+        bannerView.adUnitID = "ca-app-pub-3130282757948775/6590174686"
+        bannerView.rootViewController = self
+        
+        let request: GADRequest = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        bannerView.load(request)
     }
     
     func getData() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fVu-YY-i9P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fVu-YY-i9P">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -85,7 +85,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="1875 - 1950" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuM-BY-DwD" userLabel="Life Span">
-                                <rect key="frame" x="118.5" y="143.5" width="138.5" height="50.5"/>
+                                <rect key="frame" x="119" y="143.5" width="138.5" height="50.5"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -363,7 +363,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="trw-jz-Roi">
-                                <rect key="frame" x="16" y="167" width="342" height="385.5"/>
+                                <rect key="frame" x="16" y="167" width="344" height="385.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hbfTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="fB9-ct-3ae">
                                 <rect key="frame" x="20" y="35" width="335" height="32"/>
@@ -398,7 +398,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgl-oI-sav" userLabel="Date">
-                                <rect key="frame" x="224" y="586.5" width="134" height="50.5"/>
+                                <rect key="frame" x="226" y="586.5" width="134" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="134" id="6uS-Rw-atA"/>
                                 </constraints>
@@ -570,6 +570,11 @@
                                 </constraints>
                                 <state key="normal" image="backBtn.png"/>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yLz-NI-TPS" customClass="GADBannerView">
+                                <rect key="frame" x="67" y="97.5" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -657,6 +662,7 @@
                         <outlet property="backBtnHeightConstraint" destination="3Y3-BT-yjs" id="DoE-az-2Ag"/>
                         <outlet property="backBtnTopConstraint" destination="5CZ-QS-srh" id="x07-ue-dqU"/>
                         <outlet property="backBtnWidthConstraint" destination="uN0-gk-4hi" id="UJz-e1-Lun"/>
+                        <outlet property="bannerView" destination="yLz-NI-TPS" id="GO5-Gz-RP5"/>
                         <outlet property="bg" destination="jBU-5m-hyd" id="mWR-8h-wdg"/>
                         <outlet property="bioTextView" destination="FJA-pc-9UY" id="UKR-XF-DaW"/>
                         <outlet property="dateLabel" destination="O53-qd-IWX" id="XiF-zc-KTK"/>
@@ -929,9 +935,9 @@
                                 <exclude reference="gZZ-pm-u1a"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6Rj-lk-PDa"/>
-                                <exclude reference="oKf-fG-3eu"/>
-                                <exclude reference="oav-rq-Mar"/>
+                                <exclude reference="I3q-Xi-rpP"/>
+                                <exclude reference="MSc-pS-Xk2"/>
+                                <exclude reference="yh6-Xd-ihy"/>
                                 <exclude reference="2Or-Ed-6mR"/>
                                 <exclude reference="LPA-M4-Zyo"/>
                                 <exclude reference="xb2-23-P3F"/>
@@ -939,9 +945,9 @@
                                 <exclude reference="ByR-bQ-uKk"/>
                                 <exclude reference="IZw-FC-3gW"/>
                                 <exclude reference="yl5-9d-uQF"/>
-                                <exclude reference="I3q-Xi-rpP"/>
-                                <exclude reference="MSc-pS-Xk2"/>
-                                <exclude reference="yh6-Xd-ihy"/>
+                                <exclude reference="6Rj-lk-PDa"/>
+                                <exclude reference="oKf-fG-3eu"/>
+                                <exclude reference="oav-rq-Mar"/>
                                 <exclude reference="25l-7w-3wW"/>
                                 <exclude reference="6bL-uC-3DE"/>
                                 <exclude reference="fJb-js-rOC"/>
@@ -955,9 +961,9 @@
                                 <include reference="gZZ-pm-u1a"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="6Rj-lk-PDa"/>
-                                <include reference="oKf-fG-3eu"/>
-                                <include reference="oav-rq-Mar"/>
+                                <include reference="I3q-Xi-rpP"/>
+                                <include reference="MSc-pS-Xk2"/>
+                                <include reference="yh6-Xd-ihy"/>
                                 <include reference="2Or-Ed-6mR"/>
                                 <include reference="LPA-M4-Zyo"/>
                                 <include reference="xb2-23-P3F"/>
@@ -965,9 +971,9 @@
                                 <include reference="ByR-bQ-uKk"/>
                                 <include reference="IZw-FC-3gW"/>
                                 <include reference="yl5-9d-uQF"/>
-                                <include reference="I3q-Xi-rpP"/>
-                                <include reference="MSc-pS-Xk2"/>
-                                <include reference="yh6-Xd-ihy"/>
+                                <include reference="6Rj-lk-PDa"/>
+                                <include reference="oKf-fG-3eu"/>
+                                <include reference="oav-rq-Mar"/>
                                 <include reference="25l-7w-3wW"/>
                                 <include reference="6bL-uC-3DE"/>
                                 <include reference="fJb-js-rOC"/>
@@ -1081,7 +1087,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fVu-YY-i9P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kej-4w-kFt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kej-4w-kFt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -39,7 +39,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        getListOfFigures()
+        //getListOfFigures()
         setHBFTitle()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
