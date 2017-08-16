@@ -20,12 +20,8 @@ class SearchedViewController: UIViewController {
     
     var subTitleText = String()
     
-    let searchController = UISearchController(searchResultsController: nil)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
         // Do any additional setup after loading the view.
     }
