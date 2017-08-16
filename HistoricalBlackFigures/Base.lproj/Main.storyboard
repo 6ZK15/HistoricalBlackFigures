@@ -32,10 +32,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="wgC-er-06u">
-                                <rect key="frame" x="16" y="151.5" width="343" height="364"/>
+                                <rect key="frame" x="16" y="157" width="343" height="353"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22c-KO-NRG">
-                                <rect key="frame" x="0.0" y="202" width="375" height="292.5"/>
+                                <rect key="frame" x="0.0" y="213" width="375" height="276"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="7LC-7S-Ea1" kind="embed" id="n0Z-Wf-oPg"/>
@@ -59,14 +59,14 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="VBq-TL-97s" userLabel="Subtitle">
-                                <rect key="frame" x="20" y="72" width="335" height="66.5"/>
+                                <rect key="frame" x="20" y="72" width="335" height="72"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-kX-bjC" userLabel="Date">
-                                <rect key="frame" x="239" y="586.5" width="120" height="50.5"/>
+                                <rect key="frame" x="239" y="581" width="120" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="rGi-eh-Dmp"/>
                                 </constraints>
@@ -85,7 +85,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="1875 - 1950" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuM-BY-DwD" userLabel="Life Span">
-                                <rect key="frame" x="119" y="143.5" width="138.5" height="50.5"/>
+                                <rect key="frame" x="59" y="149" width="259" height="56"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -206,7 +206,7 @@
             <objects>
                 <tableViewController id="7LC-7S-Ea1" customClass="TableViewController" customModule="HistoricalBlackFigures" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ioK-Bp-xDx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -363,7 +363,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="trw-jz-Roi">
-                                <rect key="frame" x="16" y="167" width="344" height="385.5"/>
+                                <rect key="frame" x="16" y="167" width="344" height="380"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hbfTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="fB9-ct-3ae">
                                 <rect key="frame" x="20" y="35" width="335" height="32"/>
@@ -398,7 +398,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgl-oI-sav" userLabel="Date">
-                                <rect key="frame" x="226" y="586.5" width="134" height="50.5"/>
+                                <rect key="frame" x="226" y="581" width="134" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="134" id="6uS-Rw-atA"/>
                                 </constraints>
@@ -442,7 +442,7 @@
                                 </connections>
                             </tableView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0x-wO-G50">
-                                <rect key="frame" x="0.0" y="211" width="375" height="329.5"/>
+                                <rect key="frame" x="0.0" y="211" width="375" height="324"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="7LC-7S-Ea1" kind="embed" id="I61-TE-sod"/>
@@ -532,14 +532,14 @@
                         <viewControllerLayoutGuide type="bottom" id="Swg-V6-DpN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b7F-Bb-2DG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgLS.png" translatesAutoresizingMaskIntoConstraints="NO" id="jBU-5m-hyd">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="329.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="324"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="zQd-fl-l3o">
-                                <rect key="frame" x="16" y="136" width="343" height="57.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="52"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LVN-dQ-UiB" userLabel="Subtitle">
                                 <rect key="frame" x="16" y="60" width="343" height="68"/>
@@ -549,13 +549,13 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="O53-qd-IWX" userLabel="Date">
-                                <rect key="frame" x="256" y="261.5" width="103" height="38"/>
+                                <rect key="frame" x="256" y="256" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="FJA-pc-9UY">
-                                <rect key="frame" x="16" y="136" width="343" height="57.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -682,14 +682,14 @@
                         <viewControllerLayoutGuide type="bottom" id="zIu-MA-F4Q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t91-di-d6h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgA.png" translatesAutoresizingMaskIntoConstraints="NO" id="qYR-0t-vbi">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="329.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="324"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="tTq-nP-OhP">
-                                <rect key="frame" x="16" y="136" width="343" height="57.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="52"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="34w-Cs-5XT" userLabel="Subtitle">
                                 <rect key="frame" x="16" y="60" width="343" height="68"/>
@@ -699,7 +699,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Wk-lz-TVD">
-                                <rect key="frame" x="16" y="136" width="343" height="75.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="70"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -707,7 +707,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jCb-y8-Cfe" userLabel="Date">
-                                <rect key="frame" x="256" y="261.5" width="103" height="38"/>
+                                <rect key="frame" x="256" y="256" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -832,14 +832,14 @@
                         <viewControllerLayoutGuide type="bottom" id="zT3-BD-k3R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="m1U-8z-WPO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgF.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gaw-WP-QlH">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="329.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="324"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jae-hP-Ev0">
-                                <rect key="frame" x="16" y="136" width="343" height="57.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="52"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Gb4-6T-QIM" userLabel="Subtitle">
                                 <rect key="frame" x="16" y="60" width="343" height="68"/>
@@ -849,7 +849,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gZZ-pm-u1a" userLabel="Date">
-                                <rect key="frame" x="256" y="261.5" width="103" height="38"/>
+                                <rect key="frame" x="256" y="256" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -863,7 +863,7 @@
                                 <state key="normal" image="backBtn.png"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cwi-fb-dMg">
-                                <rect key="frame" x="16" y="136" width="343" height="76"/>
+                                <rect key="frame" x="16" y="136" width="343" height="70.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1005,11 +1005,11 @@
                         <viewControllerLayoutGuide type="bottom" id="iak-o2-byn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wig-5S-QmG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgG.png" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-mT-9JS">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="329.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="324"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BXL-VK-2uF" userLabel="Subtitle">
                                 <rect key="frame" x="16" y="60" width="343" height="68"/>
@@ -1022,7 +1022,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="per-MW-bS3" userLabel="Date">
-                                <rect key="frame" x="225" y="261.5" width="134" height="38"/>
+                                <rect key="frame" x="225" y="256" width="134" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="134" id="QAP-6y-TZM"/>
                                     <constraint firstAttribute="height" constant="38" id="XA5-BH-E1h"/>
@@ -1032,7 +1032,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lq-BC-e1D">
-                                <rect key="frame" x="16" y="136" width="343" height="75.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1087,7 +1087,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fVu-YY-i9P" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kej-4w-kFt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kej-4w-kFt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
