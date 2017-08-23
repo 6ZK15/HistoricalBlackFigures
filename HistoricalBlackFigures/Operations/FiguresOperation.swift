@@ -52,7 +52,7 @@ class FiguresOperation: NSObject {
             self.databaseDate = snapshot.value as! String
             print("Database Date value: ", self.databaseDate)
             
-            if datelabel.isEqual(self.databaseDate) {
+            if datelabel.text == (self.databaseDate) {
             
             } else {
                 print("Dates do not match")
