@@ -154,6 +154,8 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         searchController.searchBar.barTintColor = UIColor.clear
         searchController.searchBar.backgroundColor = UIColor.clear
         searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
+        searchController.dimsBackgroundDuringPresentation = false
+
     }
     
     func setSearchBarContentList() {
