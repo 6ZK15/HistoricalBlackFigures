@@ -27,5 +27,4 @@ class SearchTableViewCell: UITableViewCell {
         self.figures = figure
         self.textLabel?.text = figure.figuresKey
     }
-
 }

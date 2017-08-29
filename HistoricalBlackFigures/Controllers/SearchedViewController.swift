@@ -18,12 +18,22 @@ class SearchedViewController: UIViewController {
     @IBOutlet weak var backBtnWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var backBtnHeightConstraint: NSLayoutConstraint!
     
-    var subTitleText = String()
+    // Declare Classes
+    var figuresOperations = FiguresOperation()
+    
+    // Declare Variables
+    var subTitleText: String? = nil
+    var lifeSpanText: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        dateLabel.isHidden = true
+        subTitle.text = subTitleText
+        lifeSpan.text = lifeSpanText
+        
+        backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
+        let backButton = UIBarButtonItem(customView: backBtn)
+        navigationItem.leftBarButtonItem = backButton
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +41,11 @@ class SearchedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func backPressed() {
+        navigationController?.popViewController(animated: true)
+        let hvc = HomeViewController()
+        hvc.viewWillAppear(true)
+    }
 
     /*
     // MARK: - Navigation

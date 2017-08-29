@@ -30,24 +30,22 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
+    var searchedSubTitle: String!
     
     var isSearching = Bool()
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
         getListOfFigures()
         setHBFTitle()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
         setSearchController()
-        
-        // DispatchQueue.global(qos: .default).async(execute: {() -> Void in
-        //     self.startTimer()
-        // })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        searchController.searchBar.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,7 +135,10 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "svcSegue", sender: indexPath)
+        searchBarCancelButtonClicked(searchController.searchBar)
+        let indexPath = searchTableView.indexPathForSelectedRow!
+        let cell = searchTableView.cellForRow(at: indexPath) as! SearchTableViewCell
+        searchedSubTitle = cell.textLabel?.text
     }
     
     // MARK: - UISearchBarDelegate / UISearchDisplayDelegate
@@ -155,14 +156,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         searchController.searchBar.backgroundColor = UIColor.clear
         searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
         searchController.dimsBackgroundDuringPresentation = false
-
-    }
-    
-    func setSearchBarContentList() {
-    }
-    
-    func searchTableList() {
-        
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -178,7 +171,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
-        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -187,6 +179,8 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchController.isActive = false
+        searchController.searchBar.isHidden = true
         containerView.alpha = 1
         gradientView.isHidden = true
     }
@@ -199,7 +193,13 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "svcSegue" {
+            if let svc = segue.destination as? SearchedViewController {
+                let indexPath = searchTableView.indexPathForSelectedRow
+                let selectedRow = indexPath?.row
+                svc.subTitleText = filteredFigures[selectedRow!].figuresKey
+                svc.lifeSpanText = filteredFigures[selectedRow!].lifeSpan
+            }
+        }
     }
 }
