@@ -42,15 +42,14 @@ class LifeSummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        getData()
+//      getData()
         adjustBackBtn()
         checkForSearchedFigure()
         setHBFTitle()
         setBioTextView()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
-        loadAd()
-        subTitle.text = subTitleText
+        //loadAd()
+        //subTitle.text = subTitleText
         bioTextView.text = bioText
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
@@ -85,6 +84,7 @@ class LifeSummaryViewController: UIViewController {
     func setHBFTitle() {
         databaseReference = FIRDatabase.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        print(figureKey)
         subTitle.text = figureKey
     }
     

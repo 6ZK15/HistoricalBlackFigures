@@ -542,16 +542,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgLS.png" translatesAutoresizingMaskIntoConstraints="NO" id="jBU-5m-hyd">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="292.5"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="zQd-fl-l3o">
-                                <rect key="frame" x="16" y="136" width="343" height="20.5"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LVN-dQ-UiB" userLabel="Subtitle">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVN-dQ-UiB" userLabel="Subtitle">
                                 <rect key="frame" x="16" y="60" width="343" height="68"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Africa.png" translatesAutoresizingMaskIntoConstraints="NO" id="zQd-fl-l3o">
+                                <rect key="frame" x="16" y="136" width="343" height="20.5"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="O53-qd-IWX" userLabel="Date">
                                 <rect key="frame" x="256" y="224.5" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="WRESTLEMANIA" family="WRESTLEMANIA" pointSize="48"/>
@@ -608,15 +608,15 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="jBU-5m-hyd"/>
-                                <exclude reference="zQd-fl-l3o"/>
                                 <exclude reference="LVN-dQ-UiB"/>
+                                <exclude reference="zQd-fl-l3o"/>
                                 <exclude reference="O53-qd-IWX"/>
                                 <exclude reference="FJA-pc-9UY"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="QcB-vw-3HP"/>
-                                <exclude reference="UaD-Ea-M1j"/>
-                                <exclude reference="sUZ-yR-vkr"/>
+                                <exclude reference="jt0-va-FS4"/>
+                                <exclude reference="nY4-SP-M5T"/>
+                                <exclude reference="uPL-VA-px8"/>
                                 <exclude reference="OqU-Je-pdn"/>
                                 <exclude reference="Yb0-Ng-2kE"/>
                                 <exclude reference="fS2-cQ-qLQ"/>
@@ -624,9 +624,9 @@
                                 <exclude reference="2IO-jn-CTi"/>
                                 <exclude reference="fjU-rZ-aE8"/>
                                 <exclude reference="n83-pB-oxx"/>
-                                <exclude reference="jt0-va-FS4"/>
-                                <exclude reference="nY4-SP-M5T"/>
-                                <exclude reference="uPL-VA-px8"/>
+                                <exclude reference="QcB-vw-3HP"/>
+                                <exclude reference="UaD-Ea-M1j"/>
+                                <exclude reference="sUZ-yR-vkr"/>
                                 <exclude reference="6N9-Ej-23F"/>
                                 <exclude reference="70d-9E-f8h"/>
                                 <exclude reference="fef-cF-T8h"/>
@@ -635,15 +635,15 @@
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="jBU-5m-hyd"/>
-                                <include reference="zQd-fl-l3o"/>
                                 <include reference="LVN-dQ-UiB"/>
+                                <include reference="zQd-fl-l3o"/>
                                 <include reference="O53-qd-IWX"/>
                                 <include reference="FJA-pc-9UY"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="QcB-vw-3HP"/>
-                                <include reference="UaD-Ea-M1j"/>
-                                <include reference="sUZ-yR-vkr"/>
+                                <include reference="jt0-va-FS4"/>
+                                <include reference="nY4-SP-M5T"/>
+                                <include reference="uPL-VA-px8"/>
                                 <include reference="OqU-Je-pdn"/>
                                 <include reference="Yb0-Ng-2kE"/>
                                 <include reference="fS2-cQ-qLQ"/>
@@ -651,9 +651,9 @@
                                 <include reference="2IO-jn-CTi"/>
                                 <include reference="fjU-rZ-aE8"/>
                                 <include reference="n83-pB-oxx"/>
-                                <include reference="jt0-va-FS4"/>
-                                <include reference="nY4-SP-M5T"/>
-                                <include reference="uPL-VA-px8"/>
+                                <include reference="QcB-vw-3HP"/>
+                                <include reference="UaD-Ea-M1j"/>
+                                <include reference="sUZ-yR-vkr"/>
                                 <include reference="6N9-Ej-23F"/>
                                 <include reference="70d-9E-f8h"/>
                                 <include reference="fef-cF-T8h"/>
@@ -670,12 +670,12 @@
                         <outlet property="bg" destination="jBU-5m-hyd" id="mWR-8h-wdg"/>
                         <outlet property="bioTextView" destination="FJA-pc-9UY" id="UKR-XF-DaW"/>
                         <outlet property="dateLabel" destination="O53-qd-IWX" id="XiF-zc-KTK"/>
-                        <outlet property="subTitle" destination="LVN-dQ-UiB" id="ZBC-mm-XoH"/>
+                        <outlet property="subTitle" destination="LVN-dQ-UiB" id="iBi-fG-sAT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BoZ-Dc-E0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.913043478261" y="312.22826086956525"/>
+            <point key="canvasLocation" x="1973.5999999999999" y="311.69415292353824"/>
         </scene>
         <!--Accomplishments View Controller-->
         <scene sceneID="lT8-k4-siQ">
