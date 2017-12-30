@@ -15,7 +15,7 @@ struct Figures {
     fileprivate var _lifeSpan: String!
     fileprivate var _lifeSummary: String!
     
-    var accomplishments: [String] {
+    var accomplishments: [String]{
         return _accomplishments
     }
     

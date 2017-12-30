@@ -33,10 +33,8 @@ class AccomplishmentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         adjustBackBtn()
-        
-//        getData()
+//      getData()
         setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         
@@ -60,7 +58,6 @@ class AccomplishmentsViewController: UIViewController {
     
     func setHBFTitle() {
         databaseReference = FIRDatabase.database().reference()
-        
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         subTitle.text = figureKey
     }
