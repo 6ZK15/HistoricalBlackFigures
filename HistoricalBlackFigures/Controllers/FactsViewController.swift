@@ -36,6 +36,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         adjustBackBtn()
+        checkForSearchedFigure()
         
 //        getData()
         setHBFTitle()
@@ -86,7 +87,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         })
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -103,6 +104,22 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
             backBtnWidthConstraint.constant = 12
             backBtnHeightConstraint.constant = 24
             backBtn.updateConstraints()
+        }
+    }
+    
+    func checkForSearchedFigure() {
+        var viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
+            bg.image = UIImage(named: "bgF2.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
+            // setSearchedBioTextView()
+        }
+        else if viewControllers?.count == 2 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
+            bg.image = UIImage(named: "bgF.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
+            // setBioTextView()
         }
     }
     

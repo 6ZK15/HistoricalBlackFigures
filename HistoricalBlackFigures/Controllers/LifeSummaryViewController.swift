@@ -114,11 +114,10 @@ class LifeSummaryViewController: UIViewController {
         }
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         navigationController?.popViewController(animated: true)
 
     }
-    
     func adjustBackBtn() {
         let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
         let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)

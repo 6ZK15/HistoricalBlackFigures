@@ -34,6 +34,7 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         
         adjustBackBtn()
+        checkForSearchedFigure()
         
 //        getData()
         setHBFTitle()
@@ -64,7 +65,7 @@ class GalleryViewController: UIViewController {
         subTitle.text = figureKey
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -84,6 +85,21 @@ class GalleryViewController: UIViewController {
         }
     }
     
+    func checkForSearchedFigure() {
+        var viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
+            bg.image = UIImage(named: "bgG2.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
+            // setSearchedBioTextView()
+        }
+        else if viewControllers?.count == 2 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
+            bg.image = UIImage(named: "bgG.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
+            // setBioTextView()
+        }
+    }
 
     /*
     // MARK: - Navigation

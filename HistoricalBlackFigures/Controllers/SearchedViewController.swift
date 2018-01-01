@@ -46,7 +46,7 @@ class SearchedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         navigationController?.popViewController(animated: true)
         let hvc = HomeViewController()
         print(hvc.randomFigure)

@@ -14,11 +14,13 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var databaseReference: FIRDatabaseReference!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        timestamp()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
         return true
     }
@@ -75,6 +77,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
+    func timestamp() {
+        let reference = FIRDatabase.database().reference()
+        reference.observe(FIRDataEventType.value) { (snapshot) in
+                let dict = snapshot.value as! NSDictionary
+                let timestamp = dict["_timeStamp"] as? String
+                print(timestamp!)
+                
+                let date = NSDate();
+                let formatter = DateFormatter();
+                formatter.dateFormat = "MM-dd-yyyy"
+                formatter.timeZone = NSTimeZone(abbreviation: "CST")! as TimeZone
+                let defaultTimeZoneStr = formatter.string(from: date as Date)
+                print(defaultTimeZoneStr)
+                
+                if timestamp != defaultTimeZoneStr {
+                    let childrenCount = snapshot.childrenCount
+                    let randomFigure = arc4random_uniform(UInt32(childrenCount))
+                    reference.child("_random").setValue(randomFigure)
+                    reference.child("_timeStamp").setValue(defaultTimeZoneStr)
+                    print("Dates is not the same. Update Needed")
+            
+                } else {
+                    print("Dates are identical. No need to update")
+            }
+            }
+        }
 
     // MARK: - Core Data Saving support
 

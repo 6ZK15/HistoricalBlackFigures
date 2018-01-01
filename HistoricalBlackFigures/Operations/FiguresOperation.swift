@@ -45,25 +45,6 @@ class FiguresOperation: NSObject {
         let year: Int = (components?.year)!
         datelabel.text = "\(Int(month)).\(Int(day)).\(Int(year))"
         print("Date: ", datelabel)
-        
-        databaseReference = FIRDatabase.database().reference()
-        databaseReference.child("_currentDate").observe(FIRDataEventType.value, with: {
-            (snapshot) in
-            self.databaseDate = snapshot.value as! String
-            print("Database Date value: ", self.databaseDate)
-            
-            if datelabel.text == (self.databaseDate) {
-            
-            } else {
-                print("Dates do not match")
-                print("Current date: ", datelabel.text!)
-                self.databaseReference.child("_currentDate").setValue(datelabel.text!)
-                
-                let randomFigure = arc4random_uniform(6) + 1
-                self.databaseReference.child("_random").setValue(randomFigure)
-            }
-        })
-        
         // Stores date in data model
 //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //        let entitiy = Entity(context: context)

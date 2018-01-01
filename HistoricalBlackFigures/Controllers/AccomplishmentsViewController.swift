@@ -34,6 +34,7 @@ class AccomplishmentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustBackBtn()
+        checkForSearchedFigure()
 //      getData()
         setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
@@ -62,7 +63,7 @@ class AccomplishmentsViewController: UIViewController {
         subTitle.text = figureKey
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -79,6 +80,22 @@ class AccomplishmentsViewController: UIViewController {
             backBtnWidthConstraint.constant = 12
             backBtnHeightConstraint.constant = 24
             backBtn.updateConstraints()
+        }
+    }
+    
+    func checkForSearchedFigure() {
+        var viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
+            bg.image = UIImage(named: "bgA2.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
+            // setSearchedBioTextView()
+        }
+        else if viewControllers?.count == 2 {
+            print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
+            bg.image = UIImage(named: "bgA.png")
+            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
+            // setBioTextView()
         }
     }
 
