@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,13 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().delegate = self
         FIRApp.configure()
         timestamp()
+        //let notification = UNMutableNotificationContent()
+//        let hvc = HomeViewController()
+//        notification.badge = hvc.badegeCount - 1 as NSNumber
+        UIApplication.shared.applicationIconBadgeNumber = 0
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
+
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
@@ -36,7 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        UIApplication.shared.applicationIconBadgeNumber = 0
+
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -48,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+ 
 
     // MARK: - Core Data stack
 
@@ -104,9 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             }
         }
-
+  
     // MARK: - Core Data Saving support
 
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -121,5 +134,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+}
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
 }
 

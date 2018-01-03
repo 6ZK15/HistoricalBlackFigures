@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseDatabase
+import UserNotifications
 
 class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDisplayDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     var figures = [Figures]()
     var filteredFigures = [Figures]()
     var randomFigure = Int()
+    var badegeCount = 0
     
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
@@ -37,11 +39,11 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     override func viewDidLoad() {
         super.viewDidLoad()
         getListOfFigures()
+        checkUserSettings()
         setHBFTitle()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
-        setSearchController()
-       
+        setSearchController()       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +91,59 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
 //            let lvc = LifeSummaryViewController()
 //            lvc.isSearchedFigured = false
         })
+    }
+    
+    func checkUserSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print(settings.authorizationStatus)
+            if(settings.authorizationStatus == .authorized) {
+                print("Authorized")
+                self.scheduleNotification()
+            } else {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.scheduleNotification()
+                    }
+                })
+            }
+        }
+    }
+
+    func scheduleNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "New Historical Figure of The Day"
+        content.body = UserDefaults.standard.string(forKey: "figureKey")!
+        content.badge = 1
+        let requestIdentifier = "HBF"
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 24
+        dateComponents.minute = 0
+        dateComponents.second = 0
+        print(dateComponents)
+        let date = NSDate();
+        
+        let formatter = DateFormatter();
+        formatter.dateFormat = "HHmm"
+        formatter.timeZone = NSTimeZone(abbreviation: "CST")! as TimeZone
+        let defaultTimeZoneStr = formatter.string(from: date as Date)
+        print(defaultTimeZoneStr)
+        //Check to see if it is after midnight in CST
+       if defaultTimeZoneStr > "2359" || defaultTimeZoneStr >= "0000" && defaultTimeZoneStr < "2359" {
+            //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
+            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger1)
+            UNUserNotificationCenter.current().add(request) { (error) in
+                if error != nil {
+                    print("false")
+                } else {
+                    print("true")
+                }
+            }
+        }
+       
     }
     
     func checkForiPhoneSize() {
@@ -178,6 +233,20 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         containerView.alpha = 0
         gradientView.isHidden = false
     }
+//    func authorizeNotifications() {
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (success, error) in
+//            if error != nil {
+//                print("Authorization Unsucessful")
+//            }else {
+//                if (success) {
+//                    print("Authorization Sucessfull")
+//                    self.checkUserSettings()
+//                }
+//            }
+//        }
+//    }
+ 
+  
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
@@ -189,7 +258,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func dismissKeyboard() {
         searchController.searchBar.resignFirstResponder()
     }
-    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

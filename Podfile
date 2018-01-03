@@ -10,6 +10,7 @@ target 'HistoricalBlackFigures' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Firebase/AdMob'
+
   # Pods for HistoricalBlackFigures
 
   target 'HistoricalBlackFiguresTests' do
