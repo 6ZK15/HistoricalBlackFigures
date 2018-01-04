@@ -10,9 +10,10 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class AccomplishmentsViewController: UIViewController {
+class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // @IBOutlets
+    @IBOutlet weak var accomplishmentsTableView: UITableView!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var backBtnHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var backBtnTopConstraint: NSLayoutConstraint!
@@ -24,12 +25,13 @@ class AccomplishmentsViewController: UIViewController {
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
+    var accomplishments = [Accomplishments]()
     
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var entity = Entity()
+//    var entity = Entity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,7 @@ class AccomplishmentsViewController: UIViewController {
 //      getData()
         setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
+        getListOfAccomplishments()
         
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
@@ -49,13 +52,13 @@ class AccomplishmentsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getData() {
-        do {
-            try context.fetch(Entity.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
-    }
+//    func getData() {
+//        do {
+//            try context.fetch(Entity.fetchRequest())
+//        } catch {
+//            print("Fetching Failed")
+//        }
+//    }
     
     func setHBFTitle() {
         databaseReference = FIRDatabase.database().reference()
@@ -97,6 +100,67 @@ class AccomplishmentsViewController: UIViewController {
             // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
             // setBioTextView()
         }
+    }
+    
+    func getListOfAccomplishments() {
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        print("This is the figure for accomplishments: ", figureKey)
+        
+        databaseReference.child(figureKey).child("accomplishments").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    print("snap of accomplishment: ", snap.value!)
+                    
+                    
+                    
+                    if let accomplishmentsDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let accomplishment = Accomplishments(key: key, dictionary: accomplishmentsDictionary)
+                        self.accomplishments.insert(accomplishment, at: 0)
+                        print("List of accomplishments: ", self.accomplishments)
+                    }
+                }
+            }
+        })
+    }
+    
+    // MARK: - UITableView Delegate/DataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return accomplishments.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+        
+        databaseReference = FIRDatabase.database().reference()
+        
+        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        
+        databaseReference.child(figureKey).child("accomplishments").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    if let friendDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let acc = Accomplishments(key: key, dictionary: friendDictionary)
+                        self.accomplishments.insert(acc, at: 0)
+                        cell.textLabel?.text = self.accomplishments[indexPath.row].accomplishment
+                    }
+                }
+                print("List of accomplishments: ", self.accomplishments)
+            }
+        })
+        return cell
     }
 
     /*

@@ -30,7 +30,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     var databaseReference: FIRDatabaseReference!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var entity = Entity()
+//    var entity = Entity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,13 +52,13 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    func getData() {
-        do {
-            try context.fetch(Entity.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
-    }
+//    func getData() {
+//        do {
+//            try context.fetch(Entity.fetchRequest())
+//        } catch {
+//            print("Fetching Failed")
+//        }
+//    }
     
     func setHBFTitle() {
         databaseReference = FIRDatabase.database().reference()
