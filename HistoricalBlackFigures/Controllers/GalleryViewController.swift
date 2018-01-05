@@ -27,16 +27,11 @@ class GalleryViewController: UIViewController {
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var entity = Entity()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         adjustBackBtn()
         checkForSearchedFigure()
-        
-//        getData()
         setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         
@@ -48,14 +43,6 @@ class GalleryViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func getData() {
-        do {
-            try context.fetch(Entity.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
     }
     
     func setHBFTitle() {
@@ -90,14 +77,10 @@ class GalleryViewController: UIViewController {
         if viewControllers?.count == 3 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
             bg.image = UIImage(named: "bgG2.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
-            // setSearchedBioTextView()
         }
         else if viewControllers?.count == 2 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
             bg.image = UIImage(named: "bgG.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
-            // setBioTextView()
         }
     }
 

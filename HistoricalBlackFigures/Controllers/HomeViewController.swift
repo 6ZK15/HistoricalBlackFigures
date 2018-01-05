@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     @IBOutlet weak var lifeSpan: UILabel!
 //    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var searchTVbottomBounds: NSLayoutConstraint!
     @IBOutlet weak var subTitle: UILabel!
     
     // Declare Classes
@@ -38,9 +39,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getListOfFigures()
         checkUserSettings()
-        setHBFTitle()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
         setSearchController()       
@@ -53,14 +52,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setHBFTitle() {
-        // Stores figure name in data model
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let entitiy = Entity(context: context)
-        entitiy.name = subTitle.text
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func getListOfFigures() {
@@ -87,9 +78,8 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
             print("List of figures: ", self.figures)
             self.subTitle.text = self.figures[self.randomFigure].figuresKey
             self.lifeSpan.text = self.figures[self.randomFigure].lifeSpan
+            UserDefaults.standard.set(self.figures[self.randomFigure].accomplishments.count, forKey: "numberOfAccomplishments")
             UserDefaults.standard.setValue(self.figures[self.randomFigure].figuresKey, forKey: "figureKey")
-//            let lvc = LifeSummaryViewController()
-//            lvc.isSearchedFigured = false
         })
     }
     
@@ -113,13 +103,13 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
 
     func scheduleNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "New Historical Figure of The Day"
+        content.title = "Historical Figure of The Day"
         content.body = UserDefaults.standard.string(forKey: "figureKey")!
         content.badge = 1
         let requestIdentifier = "HBF"
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 24
+        dateComponents.hour = 8
         dateComponents.minute = 0
         dateComponents.second = 0
         print(dateComponents)
@@ -132,9 +122,10 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         print(defaultTimeZoneStr)
         //Check to see if it is after midnight in CST
        if defaultTimeZoneStr > "2359" || defaultTimeZoneStr >= "0000" && defaultTimeZoneStr < "2359" {
-            //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
-            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger1)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            getListOfFigures()
+            //let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
+            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if error != nil {
                     print("false")
@@ -143,7 +134,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 }
             }
         }
-       
     }
     
     func checkForiPhoneSize() {
@@ -194,7 +184,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBarCancelButtonClicked(searchController.searchBar)
         let indexPath = searchTableView.indexPathForSelectedRow!
-        let cell = searchTableView.cellForRow(at: indexPath) as! SearchTableViewCell
     }
     
     // MARK: - UISearchBarDelegate / UISearchDisplayDelegate
@@ -232,32 +221,26 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         containerView.alpha = 0
         gradientView.isHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchTableView.transform = CGAffineTransform.init(translationX: 0, y: 0 - searchBar.frame.size.height)
+            self.searchTableView.frame.size.height = self.searchTableView.frame.size.height + searchBar.frame.size.height
+        })
     }
-//    func authorizeNotifications() {
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (success, error) in
-//            if error != nil {
-//                print("Authorization Unsucessful")
-//            }else {
-//                if (success) {
-//                    print("Authorization Sucessfull")
-//                    self.checkUserSettings()
-//                }
-//            }
-//        }
-//    }
- 
-  
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
-        searchController.searchBar.isHidden = true
+        searchController.searchBar.isHidden = false
         containerView.alpha = 1
         gradientView.isHidden = true
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchTableView.transform = .identity
+        })
     }
     
     func dismissKeyboard() {
         searchController.searchBar.resignFirstResponder()
     }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -274,6 +257,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 lvc.bioText = cell.figures.lifeSummary
                 print(lvc.subTitleText!)
                 UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
+                UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey
                 svc.lifeSpanText = filteredFigures[selectedRow!].lifeSpan
             }

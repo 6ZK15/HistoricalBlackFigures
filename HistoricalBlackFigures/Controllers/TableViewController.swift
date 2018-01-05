@@ -42,11 +42,9 @@ class TableViewController: UITableViewController {
         //iPhone Plus
         if (mainScreenHeight == 736) && (mainScreenWidth == 414) {
             
-        }
-        else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
+        } else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
             
-        }
-        else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
+        } else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
             lsImageView.frame = CGRect(x: CGFloat(88), y: CGFloat(8), width: CGFloat(25), height: CGFloat(25))
             lsLabel.frame = CGRect(x: CGFloat(120), y: CGFloat(0), width: CGFloat(129), height: CGFloat(30))
             lsLabel.font = UIFont(name: "WRESTLEMANIA", size: CGFloat(26))

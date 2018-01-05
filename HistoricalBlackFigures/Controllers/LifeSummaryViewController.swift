@@ -33,52 +33,33 @@ class LifeSummaryViewController: UIViewController {
     var subTitleText: String? = nil
     var bioText: String? = nil
     var isSearchedFigured = Bool()
-
-
-
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var entity = Entity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//      getData()
         adjustBackBtn()
         checkForSearchedFigure()
         setHBFTitle()
         setBioTextView()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         //loadAd()
-        //subTitle.text = subTitleText
         bioTextView.text = bioText
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
         navigationItem.leftBarButtonItem = backButton
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func loadAd()
-    {
+    func loadAd() {
         bannerView.adUnitID = "ca-app-pub-3130282757948775/6590174686"
         bannerView.rootViewController = self
         
         let request: GADRequest = GADRequest()
         request.testDevices = [kGADSimulatorID]
         bannerView.load(request)
-    }
-    
-    func getData() {
-        do {
-            try context.fetch(Entity.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
     }
     
     func setHBFTitle() {
@@ -89,35 +70,30 @@ class LifeSummaryViewController: UIViewController {
     }
     
     func setBioTextView() {
-            databaseReference = FIRDatabase.database().reference()
-            let firgureKey = UserDefaults.standard.string(forKey: "figureKey")!
-            databaseReference.child(firgureKey).child("lifeSummary").observe(FIRDataEventType.value, with: {
-                (snapshot) in
-                self.bioTextView.text = snapshot.value as! String
-            })
+        databaseReference = FIRDatabase.database().reference()
+        let firgureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        databaseReference.child(firgureKey).child("lifeSummary").observe(FIRDataEventType.value, with: {
+            (snapshot) in
+            self.bioTextView.text = snapshot.value as! String
+        })
     }
-        
     
     func checkForSearchedFigure() {
         var viewControllers: [Any]? = navigationController?.viewControllers
         if viewControllers?.count == 3 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
             bg.image = UIImage(named: "bgLS2.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
-            // setSearchedBioTextView()
         }
         else if viewControllers?.count == 2 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
             bg.image = UIImage(named: "bgLS.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
-            // setBioTextView()
         }
     }
     
     @objc func backPressed() {
         navigationController?.popViewController(animated: true)
-
     }
+    
     func adjustBackBtn() {
         let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
         let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)

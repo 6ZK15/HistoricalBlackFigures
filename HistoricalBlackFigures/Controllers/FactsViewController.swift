@@ -29,16 +29,11 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     // Declare Variables
     var databaseReference: FIRDatabaseReference!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    var entity = Entity()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         adjustBackBtn()
         checkForSearchedFigure()
-        
-//        getData()
         setHBFTitle()
         figuresOperations.setCurrentDate(datelabel: dateLabel)
         
@@ -51,14 +46,6 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    func getData() {
-//        do {
-//            try context.fetch(Entity.fetchRequest())
-//        } catch {
-//            print("Fetching Failed")
-//        }
-//    }
     
     func setHBFTitle() {
         databaseReference = FIRDatabase.database().reference()
@@ -112,14 +99,10 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if viewControllers?.count == 3 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
             bg.image = UIImage(named: "bgF2.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "SearchDataSubtitle")
-            // setSearchedBioTextView()
         }
         else if viewControllers?.count == 2 {
             print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
             bg.image = UIImage(named: "bgF.png")
-            // subTitle.text = UserDefaults.standard.object(forKey: "historicalFigure")
-            // setBioTextView()
         }
     }
     
@@ -139,7 +122,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-        
+        print(indexPath.count)
         databaseReference = FIRDatabase.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
@@ -180,7 +163,6 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 }
             }
         })
-        
         return cell
     }
 

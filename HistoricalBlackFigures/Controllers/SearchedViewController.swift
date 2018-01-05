@@ -27,9 +27,6 @@ class SearchedViewController: UIViewController {
     var lifeSpanText: String? = nil
     var accomplishments:String? = nil
     var databaseReference: FIRDatabaseReference!
-
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +50,7 @@ class SearchedViewController: UIViewController {
         hvc.viewWillAppear(true)
         getListOfFigures()
     }
+    
     func getListOfFigures() {
         databaseReference = FIRDatabase.database().reference()
         let hvc = HomeViewController()
@@ -79,9 +77,6 @@ class SearchedViewController: UIViewController {
             self.subTitle.text = hvc.figures[hvc.randomFigure].figuresKey
             self.lifeSpan.text = hvc.figures[hvc.randomFigure].lifeSpan
             UserDefaults.standard.setValue(hvc.figures[hvc.randomFigure].figuresKey, forKey: "figureKey")
-            //            let lvc = LifeSummaryViewController()
-            //            lvc.isSearchedFigured = false
         })
     }
-    
 }
