@@ -39,6 +39,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getListOfFigures()
         checkUserSettings()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
