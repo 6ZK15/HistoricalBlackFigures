@@ -21,6 +21,8 @@ class SearchedViewController: UIViewController {
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
+    var hvc = HomeViewController()
+
     
     // Declare Variables
     var subTitleText: String? = nil
@@ -45,10 +47,8 @@ class SearchedViewController: UIViewController {
     
     @objc func backPressed() {
         navigationController?.popViewController(animated: true)
-        let hvc = HomeViewController()
         print(hvc.randomFigure)
         hvc.viewWillAppear(true)
-        getListOfFigures()
     }
     
     func getListOfFigures() {

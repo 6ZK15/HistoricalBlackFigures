@@ -26,7 +26,11 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
-    var figures = [Figures]()
+    var figures = [Figures]() {
+        didSet{
+            self.searchTableView.reloadData()
+        }
+    }
     var filteredFigures = [Figures]()
     var randomFigure = Int()
     var badegeCount = 0
@@ -68,12 +72,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         databaseReference.observe(FIRDataEventType.value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                var tempArray = [Figures]()
                 for snap in snapshots {
                     if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
                         let figure = Figures(key: key, dictionary: figureDictionary)
-                        self.figures.append(figure)
+                        tempArray.append(figure)
                     }
+                    self.figures = tempArray
                 }
             }
             print("List of figures: ", self.figures)
@@ -178,6 +184,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         }
         
         cell.configureCell(figure)
+        
         
         return cell
     }
