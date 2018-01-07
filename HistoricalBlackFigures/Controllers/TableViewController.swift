@@ -31,13 +31,6 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-   
-    
-    var figures  = [Figures](){
-    didSet{
-    self.tableView.reloadData()
-    }
-    }
 
 
     override func didReceiveMemoryWarning() {

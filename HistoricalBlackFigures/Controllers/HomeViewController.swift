@@ -87,6 +87,9 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
             self.lifeSpan.text = self.figures[self.randomFigure].lifeSpan
             UserDefaults.standard.set(self.figures[self.randomFigure].accomplishments.count, forKey: "numberOfAccomplishments")
             UserDefaults.standard.setValue(self.figures[self.randomFigure].figuresKey, forKey: "figureKey")
+            print(UserDefaults.standard.setValue(self.figures[self.randomFigure].figuresKey, forKey: "figureKey"))
+            print(self.randomFigure)
+            UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex")
         })
     }
     
@@ -264,8 +267,10 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 let figureKey = cell.figures.figuresKey
                 lvc.bioText = cell.figures.lifeSummary
                 print(lvc.subTitleText!)
-                UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
+             //   UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
+                print(UserDefaults.standard.setValue(figureKey, forKey: "figureKey"))
                 UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
+                UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey
                 svc.lifeSpanText = filteredFigures[selectedRow!].lifeSpan
             }
