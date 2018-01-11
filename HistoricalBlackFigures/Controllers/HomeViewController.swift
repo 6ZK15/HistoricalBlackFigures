@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     var filteredFigures = [Figures]()
     var randomFigure = Int()
+    var randomFigureIndex = Int()
     var badegeCount = 0
     
     // Declare Variables
@@ -44,7 +45,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     override func viewDidLoad() {
         super.viewDidLoad()
         getListOfFigures()
-        checkUserSettings()
+//        checkUserSettings()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
         setSearchController()       
@@ -61,13 +62,15 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     func getListOfFigures() {
         databaseReference = FIRDatabase.database().reference()
-        
-        databaseReference.child("_random").observe(FIRDataEventType.value, with: {
-            (snapshot) in
-            UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
-            print("Random Figure: ", snapshot.value as! Int)
-            self.randomFigure = snapshot.value as! Int
-        })
+//        let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
+//        print(randomFigureIndex)
+//        
+//        databaseReference.child("_random").observe(FIRDataEventType.value, with: {
+//            (snapshot) in
+//            UserDefaults.standard.set(snapshot.value as! Int, forKey: "r")
+//            print("Random Figure: ", snapshot.value as! Int)
+//            self.randomFigure = snapshot.value as! Int
+//        })
         
         databaseReference.observe(FIRDataEventType.value, with: {
             (snapshot) in
@@ -83,13 +86,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 }
             }
             print("List of figures: ", self.figures)
-            self.subTitle.text = self.figures[self.randomFigure].figuresKey
-            self.lifeSpan.text = self.figures[self.randomFigure].lifeSpan
-            UserDefaults.standard.set(self.figures[self.randomFigure].accomplishments.count, forKey: "numberOfAccomplishments")
-            UserDefaults.standard.setValue(self.figures[self.randomFigure].figuresKey, forKey: "figureKey")
-            print(UserDefaults.standard.setValue(self.figures[self.randomFigure].figuresKey, forKey: "figureKey"))
+            self.randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
+            self.subTitle.text = self.figures[self.randomFigureIndex].figuresKey
+            self.lifeSpan.text = self.figures[self.randomFigureIndex].lifeSpan
+            UserDefaults.standard.set(self.figures[self.self.randomFigureIndex].accomplishments.count, forKey: "numberOfAccomplishments")
+            UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureKey")
+            UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureOfTheDay")
             print(self.randomFigure)
-            UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex")
+            self.checkUserSettings()
         })
     }
     
@@ -114,7 +118,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func scheduleNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Historical Figure of The Day"
-        content.body = UserDefaults.standard.string(forKey: "figureKey")!
+        content.body = UserDefaults.standard.string(forKey: "figureOfTheDay")!
         content.badge = 1
         let requestIdentifier = "HBF"
         
@@ -132,14 +136,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         print(defaultTimeZoneStr)
         //Check to see if it is after midnight in CST
        if defaultTimeZoneStr > "2359" || defaultTimeZoneStr >= "0000" && defaultTimeZoneStr < "2359" {
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            getListOfFigures()
-            //let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
-            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+           // let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
+            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger1)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if error != nil {
                     print("false")
                 } else {
+
                     print("true")
                 }
             }
@@ -270,7 +274,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
              //   UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
                 print(UserDefaults.standard.setValue(figureKey, forKey: "figureKey"))
                 UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
-                UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex")
+                UserDefaults.standard.set(randomFigureIndex, forKey: "randomFigureIndex")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey
                 svc.lifeSpanText = filteredFigures[selectedRow!].lifeSpan
             }

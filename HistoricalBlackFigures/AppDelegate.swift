@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var databaseReference: FIRDatabaseReference!
+    var randomFigure = Int()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -54,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
     }
     
@@ -74,12 +74,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if timestamp != defaultTimeZoneStr {
                     let childrenCount = snapshot.childrenCount
-                    let randomFigure = arc4random_uniform(UInt32(childrenCount))
-                    reference.child("_random").setValue(randomFigure)
+                    let randomNumber = arc4random_uniform(UInt32(childrenCount))
+                    reference.child("_random").setValue(randomNumber)
                     reference.child("_timeStamp").setValue(defaultTimeZoneStr)
                     print("Dates is not the same. Update Needed")
-            
+                    UserDefaults.standard.set(randomNumber, forKey: "randomFigureIndex")
                 } else {
+                    reference.child("_random").observe(FIRDataEventType.value, with: { (snapshot) in
+                        self.randomFigure = snapshot.value as! Int
+                        UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex")
+                        print(UserDefaults.standard.set(self.randomFigure, forKey: "randomFigureIndex"))
+                    })
                     print("Dates are identical. No need to update")
                 }
             }

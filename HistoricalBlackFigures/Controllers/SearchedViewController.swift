@@ -54,6 +54,7 @@ class SearchedViewController: UIViewController {
     @objc func backPressed() {
         navigationController?.popViewController(animated: true)
         let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
+        print(randomFigureIndex)
         UserDefaults.standard.setValue(figures[randomFigureIndex].figuresKey, forKey: "figureKey")
         hvc.viewWillAppear(true)
     }
