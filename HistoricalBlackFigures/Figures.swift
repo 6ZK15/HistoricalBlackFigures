@@ -46,6 +46,8 @@ struct Figures {
         
         if let accomplishments = dictionary["accomplishments"] as? [String] {
             self._accomplishments = accomplishments
+        } else if let accomplishments = dictionary["accomplishment"] as? [String] {
+            self._accomplishments = accomplishments
         }
     }
 }

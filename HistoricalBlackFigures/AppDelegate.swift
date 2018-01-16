@@ -93,7 +93,8 @@ func applicationWillTerminate(_ application: UIApplication) {
                         print("Int value", dbIntLocation)
                         if dbIntLocation == self.randomNumber {
                             print("true. Number is in Used Figures. Call another number")
-                            //self.generateRandomNumber
+                            reference.child("_usedFigures").child(child.key).removeValue()
+                            self.generateRandomNumber()
                         } else {
                             print("false. Number is not in Used Figures")
                         }
