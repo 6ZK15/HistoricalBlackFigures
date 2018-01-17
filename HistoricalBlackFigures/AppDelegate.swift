@@ -81,13 +81,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.generateRandomNumber()
             }
         }
-        reference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot) in
+        reference.observe(FIRDataEventType.value) { (snapshot) in
             let dict = snapshot.value as! NSDictionary
             let random = dict["_random"] as? UInt32
             self.randomNumber = random!
+            print(self.randomNumber)
             UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
         }
-    }
+ 
+        }
+    
     
     func checkUsedFigures() {
         let reference = FIRDatabase.database().reference()
