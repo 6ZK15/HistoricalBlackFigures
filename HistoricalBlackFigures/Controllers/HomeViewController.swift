@@ -136,9 +136,8 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         print(defaultTimeZoneStr)
         //Check to see if it is after midnight in CST
        if defaultTimeZoneStr > "2359" || defaultTimeZoneStr >= "0000" && defaultTimeZoneStr < "2359" {
-           // let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
-            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger1)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if error != nil {
                     print("false")
