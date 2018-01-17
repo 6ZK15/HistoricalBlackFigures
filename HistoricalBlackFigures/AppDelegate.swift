@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
+        FIRDatabase.database().persistenceEnabled = true
         return true
     }
 
