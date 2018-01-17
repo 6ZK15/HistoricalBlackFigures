@@ -100,7 +100,6 @@ func applicationWillTerminate(_ application: UIApplication) {
                         }
                     }
                 }
-                
             }
             reference.child("_usedFigures").childByAutoId().setValue(self.randomNumber)
             print("false it does not exist in here")

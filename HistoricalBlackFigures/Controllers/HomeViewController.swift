@@ -153,15 +153,16 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func checkForiPhoneSize() {
         let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
         let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)
-        //iPhone Plus
+        
         if (mainScreenHeight == 736) && (mainScreenWidth == 414) {
             print("iPhone 6/7 Plus")
-        }
-        else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
+        } else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
             print("iPhone 6/7")
-        }
-        else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
+        } else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
             print("iPhone 5/SE")
+        } else if (mainScreenHeight == 812) && (mainScreenWidth == 375) {
+            print("iPhone X")
+            
         }
     }
     

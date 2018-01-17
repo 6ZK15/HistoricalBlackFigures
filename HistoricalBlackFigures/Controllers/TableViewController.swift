@@ -45,7 +45,9 @@ class TableViewController: UITableViewController {
         if (mainScreenHeight == 736) && (mainScreenWidth == 414) {
             
         } else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
-            
+            gImageView.frame.origin.x = 172
+            gLabel.frame.origin.x = 215
+            gLabel.adjustsFontSizeToFitWidth = true
         } else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
             lsImageView.frame = CGRect(x: CGFloat(88), y: CGFloat(8), width: CGFloat(25), height: CGFloat(25))
             lsLabel.frame = CGRect(x: CGFloat(120), y: CGFloat(0), width: CGFloat(129), height: CGFloat(30))
@@ -62,6 +64,10 @@ class TableViewController: UITableViewController {
             gImageView.frame = CGRect(x: CGFloat(148), y: CGFloat(4), width: CGFloat(30), height: CGFloat(30))
             gLabel.frame = CGRect(x: CGFloat(181), y: CGFloat(0), width: CGFloat(40), height: CGFloat(30))
             gLabel.font = UIFont(name: "WRESTLEMANIA", size: CGFloat(28))
+            gLabel.adjustsFontSizeToFitWidth = true
+        } else if (mainScreenHeight == 812) && (mainScreenWidth == 375) {
+            gImageView.frame.origin.x = 172
+            gLabel.frame.origin.x = 215
             gLabel.adjustsFontSizeToFitWidth = true
         }
     }
