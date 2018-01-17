@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         timestamp()
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
-        FIRDatabase.database().persistenceEnabled = true
         return true
     }
 
