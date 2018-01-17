@@ -80,6 +80,12 @@ func applicationWillTerminate(_ application: UIApplication) {
                 self.generateRandomNumber()
             }
         }
+        reference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot) in
+            let dict = snapshot.value as! NSDictionary
+            let random = dict["_random"] as? UInt32
+            self.randomNumber = random!
+            UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
+        }
     }
     
     func checkUsedFigures() {
