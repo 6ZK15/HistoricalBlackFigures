@@ -40,6 +40,7 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
         navigationItem.leftBarButtonItem = backButton
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,14 +120,16 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
         cell.textLabel?.textColor = UIColor.white
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        cell.textLabel?.numberOfLines = 4
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        cell.textLabel?.numberOfLines = 100
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+
         cell.textLabel?.sizeToFit()
         databaseReference = FIRDatabase.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
@@ -138,6 +141,8 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
                 cell.textLabel?.text = self.accomplishmentsArray[indexPath.row]
                 print(self.accomplishmentsArray.count)
                 self.numberOfAccomplishments = self.accomplishmentsArray.count
+                tableView.rowHeight = UITableViewAutomaticDimension
+
             }
         }
         return cell
