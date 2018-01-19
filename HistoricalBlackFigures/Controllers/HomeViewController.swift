@@ -102,13 +102,13 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
             print(settings.authorizationStatus)
             if(settings.authorizationStatus == .authorized) {
                 print("Authorized")
-                self.scheduleNotification()
+//                self.scheduleNotification()
             } else {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted, error) in
                     if let error = error {
                         print(error)
                     } else {
-                        self.scheduleNotification()
+//                        self.scheduleNotification()
                     }
                 })
             }

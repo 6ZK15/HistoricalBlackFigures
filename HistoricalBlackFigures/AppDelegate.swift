@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseMessaging
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
     
     var window: UIWindow?
     var databaseReference: FIRDatabaseReference!
@@ -24,13 +25,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
-        UNUserNotificationCenter.current().delegate = self
+//        UNUserNotificationCenter.current().delegate = self
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            FIRMessaging.messaging().remoteMessageDelegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         timestamp()
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
+        
         return true
     }
 
@@ -54,6 +74,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        if let token = FIRInstanceID.instanceID().token() {
+            print("InstanceID token: \(token)")
+        }
     }
 
     func generateRandomNumber() {
@@ -115,10 +141,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             reference.child("_random").setValue(self.randomNumber)
         }
     }
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler(.alert)
+    
+    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+        print("Remote message app data: ", remoteMessage.appData)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification:
+        UNNotification, withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler(.alert)
     }
 }

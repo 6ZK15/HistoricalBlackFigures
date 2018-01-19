@@ -8,6 +8,9 @@ PODS:
   - Firebase/Database (3.15.0):
     - Firebase/Core
     - FirebaseDatabase (= 3.1.2)
+  - Firebase/Messaging (3.15.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 1.2.2)
   - Firebase/Storage (3.15.0):
     - Firebase/Core
     - FirebaseStorage (= 1.1.0)
@@ -20,19 +23,28 @@ PODS:
   - FirebaseDatabase (3.1.2):
     - FirebaseAnalytics (~> 3.7)
   - FirebaseInstanceID (1.0.9)
+  - FirebaseMessaging (1.2.2):
+    - FirebaseAnalytics (~> 3.7)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - FirebaseStorage (1.1.0):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
   - Google-Mobile-Ads-SDK (7.19.0)
   - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
+  - Protobuf (3.5.0)
 
 DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Messaging
   - Firebase/Storage
 
 SPEC CHECKSUMS:
@@ -41,11 +53,13 @@ SPEC CHECKSUMS:
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
   Google-Mobile-Ads-SDK: d1bcdbd8347a105a687345b8511701172a5074e9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
 
-PODFILE CHECKSUM: 502ab656bbbd9eafcfe6ed47fe6d25e3938d0d64
+PODFILE CHECKSUM: 76d0e1038aa7807c0a600051c097a5c3a8f2ff7f
 
-COCOAPODS: 1.4.0.beta.2
+COCOAPODS: 1.2.1

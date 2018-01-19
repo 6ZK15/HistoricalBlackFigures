@@ -98,6 +98,7 @@
 		843BCB831EF8909200343004 /* FactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactsViewController.swift; path = Controllers/FactsViewController.swift; sourceTree = "<group>"; };
 		843BCB851EF8910E00343004 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GalleryViewController.swift; path = Controllers/GalleryViewController.swift; sourceTree = "<group>"; };
 		843BCB871EF8DB6A00343004 /* SearchedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchedViewController.swift; path = Controllers/SearchedViewController.swift; sourceTree = "<group>"; };
+		846BC13220105E9300A99A95 /* HistoricalBlackFigures.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HistoricalBlackFigures.entitlements; sourceTree = "<group>"; };
 		8481BFFC1EEA6F23005EB86F /* HistoricalBlackFigures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HistoricalBlackFigures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8481BFFF1EEA6F23005EB86F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8481C0011EEA6F23005EB86F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 		8481BFFE1EEA6F23005EB86F /* HistoricalBlackFigures */ = {
 			isa = PBXGroup;
 			children = (
+				846BC13220105E9300A99A95 /* HistoricalBlackFigures.entitlements */,
 				8481BFFF1EEA6F23005EB86F /* AppDelegate.swift */,
 				8481C0331EEA7596005EB86F /* Models */,
 				8481C0341EEA75A7005EB86F /* Views */,
@@ -437,11 +439,14 @@
 				TargetAttributes = {
 					8481BFFB1EEA6F23005EB86F = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 8V783DP7TW;
+						DevelopmentTeam = TJ9QMXW52J;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -556,7 +561,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		49816273EF0DF8ED5DF2EB4D /* [CP] Check Pods Manifest.lock */ = {
@@ -574,7 +579,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		725A2D24486448EECD64C4D0 /* [CP] Copy Pods Resources */ = {
@@ -607,7 +612,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CA4BC965C844BF03F51C6C53 /* [CP] Embed Pods Frameworks */ = {
@@ -873,10 +878,11 @@
 			baseConfigurationReference = FB816BFB9103F0294F3E19E5 /* Pods-HistoricalBlackFigures.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V783DP7TW;
+				CODE_SIGN_ENTITLEMENTS = HistoricalBlackFigures/HistoricalBlackFigures.entitlements;
+				DEVELOPMENT_TEAM = TJ9QMXW52J;
 				INFOPLIST_FILE = HistoricalBlackFigures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MrHorace.HistoricalBlackFigures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hd2technology.HBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -888,10 +894,11 @@
 			baseConfigurationReference = E2BE2A301CE037F4C3CDCDCE /* Pods-HistoricalBlackFigures.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V783DP7TW;
+				CODE_SIGN_ENTITLEMENTS = HistoricalBlackFigures/HistoricalBlackFigures.entitlements;
+				DEVELOPMENT_TEAM = TJ9QMXW52J;
 				INFOPLIST_FILE = HistoricalBlackFigures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = MrHorace.HistoricalBlackFigures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hd2technology.HBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
