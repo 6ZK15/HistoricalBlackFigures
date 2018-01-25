@@ -25,7 +25,7 @@ class GalleryViewController: UIViewController {
     var figuresOperations = FiguresOperation()
     
     // Declare Variables
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class GalleryViewController: UIViewController {
     }
     
     func setHBFTitle() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         subTitle.text = figureKey

@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     var badegeCount = 0
     
     // Declare Variables
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     var searchedSubTitle: String!
     var isSearching = Bool()
     let searchController = UISearchController(searchResultsController: nil)
@@ -61,20 +61,20 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     
     func getListOfFigures() {
-        databaseReference = FIRDatabase.database().reference()
-//        let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
-//        print(randomFigureIndex)
-//        
-//        databaseReference.child("_random").observe(FIRDataEventType.value, with: {
-//            (snapshot) in
-//            UserDefaults.standard.set(snapshot.value as! Int, forKey: "r")
-//            print("Random Figure: ", snapshot.value as! Int)
-//            self.randomFigure = snapshot.value as! Int
-//        })
+        databaseReference = Database.database().reference()
+        let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
+        print(randomFigureIndex)
         
-        databaseReference.observe(FIRDataEventType.value, with: {
+        databaseReference.child("_random").observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
+            print("Random Figure: ", snapshot.value as! Int)
+            self.randomFigure = snapshot.value as! Int
+        })
+        
+        databaseReference.observe(DataEventType.value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 var tempArray = [Figures]()
                 for snap in snapshots {
                     if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
@@ -200,7 +200,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBarCancelButtonClicked(searchController.searchBar)
-        let indexPath = searchTableView.indexPathForSelectedRow!
+        _ = searchTableView.indexPathForSelectedRow!
     }
     
     // MARK: - UISearchBarDelegate / UISearchDisplayDelegate

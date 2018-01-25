@@ -29,7 +29,7 @@ class LifeSummaryViewController: UIViewController {
     var homeVC: HomeViewController!
     
     // Declare Variables
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     var subTitleText: String? = nil
     var bioText: String? = nil
     var isSearchedFigured = Bool()
@@ -63,16 +63,16 @@ class LifeSummaryViewController: UIViewController {
     }
     
     func setHBFTitle() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         print(figureKey)
         subTitle.text = figureKey
     }
     
     func setBioTextView() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let firgureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        databaseReference.child(firgureKey).child("lifeSummary").observe(FIRDataEventType.value, with: {
+        databaseReference.child(firgureKey).child("lifeSummary").observe(DataEventType.value, with: {
             (snapshot) in
             self.bioTextView.text = snapshot.value as! String
         })

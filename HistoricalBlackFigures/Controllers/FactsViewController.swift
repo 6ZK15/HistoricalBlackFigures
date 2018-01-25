@@ -27,7 +27,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     var facts = [Facts]()
     
     // Declare Variables
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,20 +48,20 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func setHBFTitle() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         subTitle.text = figureKey
     }
     
     func getFacts() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         
-        databaseReference.child(figureKey).observe(FIRDataEventType.value, with: {
+        databaseReference.child(figureKey).observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let factsDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
@@ -123,13 +123,13 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
         print(indexPath.count)
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         
-        databaseReference.child(figureKey).observe(FIRDataEventType.value, with: {
+        databaseReference.child(figureKey).observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let factsDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

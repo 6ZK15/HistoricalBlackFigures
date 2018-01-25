@@ -13,10 +13,10 @@ import FirebaseMessaging
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     var randomFigure = Int()
     var randomNumber = UInt32()
     var figures = [Int]()
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 options: authOptions,
                 completionHandler: {_, _ in })
             // For iOS 10 data message (sent via FCM
-            FIRMessaging.messaging().remoteMessageDelegate = self
+            Messaging.messaging().remoteMessageDelegate = self
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
         
-        FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
+        FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         timestamp()
         
         UIApplication.shared.applicationIconBadgeNumber = 0
@@ -77,14 +77,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, A deviceToken: Data) {
-        if let token = FIRInstanceID.instanceID().token() {
+        if let token = InstanceID.instanceID().token() {
             print("InstanceID token: \(token)")
         }
     }
 
     func generateRandomNumber() {
-        let reference = FIRDatabase.database().reference()
-        reference.observe(FIRDataEventType.value) { (snapshot) in
+        let reference = Database.database().reference()
+        reference.observe(DataEventType.value) { (snapshot) in
             let childrenCount = snapshot.childrenCount - 4
             self.randomNumber = arc4random_uniform(UInt32(childrenCount))
         }
@@ -92,8 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func timestamp() {
-        let reference = FIRDatabase.database().reference()
-        reference.observe(FIRDataEventType.value) { (snapshot) in
+        let reference = Database.database().reference()
+        reference.observe(DataEventType.value) { (snapshot) in
             let dict = snapshot.value as! NSDictionary
             let timestamp = dict["_timeStamp"] as? String
             let date = NSDate()
@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.generateRandomNumber()
             }
         }
-        reference.observe(FIRDataEventType.value) { (snapshot) in
+        reference.observe(DataEventType.value) { (snapshot) in
             let dict = snapshot.value as! NSDictionary
             let random = dict["_random"] as? UInt32
             self.randomNumber = random!
@@ -115,13 +115,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
         }
  
-        }
+    }
     
     
     func checkUsedFigures() {
-        let reference = FIRDatabase.database().reference()
-        reference.child("_usedFigures").observeSingleEvent(of: FIRDataEventType.value) { (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+        let reference = Database.database().reference()
+        reference.child("_usedFigures").observeSingleEvent(of: DataEventType.value) { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in snapshots {
                     let childSnapshot = snapshot.childSnapshot(forPath: child.key)
                     if let dbLocation = childSnapshot.value {
@@ -145,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+    @objc(applicationReceivedRemoteMessage:) func application(received remoteMessage: MessagingRemoteMessage) {
         print("Remote message app data: ", remoteMessage.appData)
     }
     

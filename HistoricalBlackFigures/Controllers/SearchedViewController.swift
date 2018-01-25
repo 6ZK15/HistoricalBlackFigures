@@ -33,7 +33,7 @@ class SearchedViewController: UIViewController {
     var subTitleText: String? = nil
     var lifeSpanText: String? = nil
     var accomplishments:String? = nil
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,17 +60,17 @@ class SearchedViewController: UIViewController {
     }
     
     func getListOfFigures() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let hvc = HomeViewController()
-        databaseReference.child("_random").observe(FIRDataEventType.value, with: {
+        databaseReference.child("_random").observe(DataEventType.value, with: {
             (snapshot) in
             UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
             print("Random Figure: ", snapshot.value as! Int)
             hvc.randomFigure = snapshot.value as! Int
         })
-        databaseReference.observe(FIRDataEventType.value, with: {
+        databaseReference.observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

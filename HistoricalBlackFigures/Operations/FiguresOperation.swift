@@ -18,14 +18,14 @@ class FiguresOperation: NSObject {
     // Declare Classes
     var homeVC: HomeViewController!
     
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     
     func getListOfFigures(figures: [Figures]) {
         var figures = figures
-        databaseReference = FIRDatabase.database().reference()
-        databaseReference.observe(FIRDataEventType.value, with: {
+        databaseReference = Database.database().reference()
+        databaseReference.observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let figureDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

@@ -28,7 +28,7 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
 
     
     // Declare Variables
-    var databaseReference: FIRDatabaseReference!
+    var databaseReference: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func setHBFTitle() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
         subTitle.text = figureKey
     }
@@ -87,11 +87,11 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func getListOfAccomplishments() {
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        databaseReference.child(figureKey).child("accomplishments").observe(FIRDataEventType.value, with: {
+        databaseReference.child(figureKey).child("accomplishments").observe(DataEventType.value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in snapshots {
                     let snap = child.value as! String
                     self.accomplishmentsArray.insert(snap, at: 0)
@@ -131,10 +131,10 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
         cell.textLabel?.lineBreakMode = .byWordWrapping
 
         cell.textLabel?.sizeToFit()
-        databaseReference = FIRDatabase.database().reference()
+        databaseReference = Database.database().reference()
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        databaseReference.child(figureKey).child("accomplishments").observeSingleEvent(of: FIRDataEventType.value) { (snapshot) in
-            for child in (snapshot.children.allObjects as? [FIRDataSnapshot])! {
+        databaseReference.child(figureKey).child("accomplishments").observeSingleEvent(of: DataEventType.value) { (snapshot) in
+            for child in (snapshot.children.allObjects as? [DataSnapshot])! {
                 print(child.childrenCount)
                 let snap = child.value as! String
                 self.accomplishmentsArray.insert(snap, at: 0)
