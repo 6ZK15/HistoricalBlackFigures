@@ -19,7 +19,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     @IBOutlet weak var datelabel: UILabel!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var lifeSpan: UILabel!
-//    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var searchTVbottomBounds: NSLayoutConstraint!
     @IBOutlet weak var subTitle: UILabel!
@@ -45,10 +44,9 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     override func viewDidLoad() {
         super.viewDidLoad()
         getListOfFigures()
-//        checkUserSettings()
         checkForiPhoneSize()
         figuresOperations.setCurrentDate(datelabel: datelabel)
-        setSearchController()       
+        setSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,12 +61,10 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     func getListOfFigures() {
         databaseReference = Database.database().reference()
         let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
-        print(randomFigureIndex)
         
         databaseReference.child("_random").observe(DataEventType.value, with: {
             (snapshot) in
             UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
-            print("Random Figure: ", snapshot.value as! Int)
             self.randomFigure = snapshot.value as! Int
         })
         
@@ -85,14 +81,12 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                     self.figures = tempArray
                 }
             }
-            print("List of figures: ", self.figures)
             self.randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
             self.subTitle.text = self.figures[self.randomFigureIndex].figuresKey
             self.lifeSpan.text = self.figures[self.randomFigureIndex].lifeSpan
             UserDefaults.standard.set(self.figures[self.self.randomFigureIndex].accomplishments.count, forKey: "numberOfAccomplishments")
             UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureKey")
             UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureOfTheDay")
-            print(self.randomFigure)
             self.checkUserSettings()
         })
     }
@@ -102,51 +96,14 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
             print(settings.authorizationStatus)
             if(settings.authorizationStatus == .authorized) {
                 print("Authorized")
-//                self.scheduleNotification()
             } else {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted, error) in
                     if let error = error {
                         print(error)
                     } else {
-//                        self.scheduleNotification()
+                        
                     }
                 })
-            }
-        }
-    }
-
-    func scheduleNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "Historical Figure of The Day"
-        content.body = UserDefaults.standard.string(forKey: "figureOfTheDay")!
-        content.badge = 1
-        let requestIdentifier = "HBF"
-        
-        var dateComponents = DateComponents()
-        dateComponents.hour = 8
-        dateComponents.minute = 0
-        dateComponents.second = 0
-        print(dateComponents)
-        let date = NSDate();
-        
-        let formatter = DateFormatter();
-        formatter.dateFormat = "HHmm"
-        formatter.timeZone = NSTimeZone(abbreviation: "CST")! as TimeZone
-        let defaultTimeZoneStr = formatter.string(from: date as Date)
-        print(defaultTimeZoneStr)
-        //Check to see if it is after midnight in CST
-       if defaultTimeZoneStr > "2359" || defaultTimeZoneStr >= "0000" && defaultTimeZoneStr < "2359" {
-          //  let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: 8, repeats: false)
-
-            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger1)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if error != nil {
-                    print("false")
-                } else {
-
-                    print("true")
-                }
             }
         }
     }
@@ -272,9 +229,6 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 lvc.subTitleText = cell.figures.figuresKey
                 let figureKey = cell.figures.figuresKey
                 lvc.bioText = cell.figures.lifeSummary
-                print(lvc.subTitleText!)
-             //   UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
-                print(UserDefaults.standard.setValue(figureKey, forKey: "figureKey"))
                 UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
                 UserDefaults.standard.set(randomFigureIndex, forKey: "randomFigureIndex")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey

@@ -69,7 +69,6 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
                         self.facts.insert(fact, at: 0)
                     }
                 }
-                print("List of facts: ", self.facts)
             }
         })
     }
@@ -82,11 +81,11 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
         let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)
         if (mainScreenHeight == 736) && (mainScreenWidth == 414) {
-            print("iPhone 6/7 Plus")
+            // iPhone 6/7 Plus
         } else if (mainScreenHeight == 667) && (mainScreenWidth == 375) {
-            print("iPhone 6/7")
+            // iPhone 6/7
         } else if (mainScreenHeight == 568) && (mainScreenWidth == 320) {
-            print("iPhone 5/SE")
+            // iPhone 5/SE
             backBtnTopConstraint.constant = 8
             backBtnWidthConstraint.constant = 12
             backBtnHeightConstraint.constant = 24
@@ -95,13 +94,11 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func checkForSearchedFigure() {
-        var viewControllers: [Any]? = navigationController?.viewControllers
+        let viewControllers: [Any]? = navigationController?.viewControllers
         if viewControllers?.count == 3 {
-            print("Presenting View Controller objectAtIndex: \(viewControllers?[0].self ?? "error")")
             bg.image = UIImage(named: "bgF2.png")
         }
         else if viewControllers?.count == 2 {
-            print("Presenting View Controller objectAtIndex: \(viewControllers?[1].self ?? "error")")
             bg.image = UIImage(named: "bgF.png")
         }
     }
@@ -122,7 +119,6 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-        print(indexPath.count)
         databaseReference = Database.database().reference()
         
         let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
@@ -137,7 +133,6 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
                         self.facts.insert(fact, at: 0)
                     }
                 }
-                print("List of facts: ", self.facts)
                 
                 if indexPath.row == 0 {
                     cell.textLabel?.text = "Date of Birth:"

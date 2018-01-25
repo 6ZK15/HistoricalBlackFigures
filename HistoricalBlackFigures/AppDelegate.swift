@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
-//        UNUserNotificationCenter.current().delegate = self
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -74,6 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        let reference = Database.database().reference()
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
+        print("Device Token: ", deviceToken!)
+        reference.child("_deviceToken").observe(DataEventType.value, with: {
+            (snapshot) in
+            if snapshot.hasChild(deviceToken!) {
+                snapshot.ref.child(snapshot.key).child(deviceToken!).removeValue()
+            }
+        })
     }
     
     func application(_ application: UIApplication, A deviceToken: Data) {
@@ -111,10 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let dict = snapshot.value as! NSDictionary
             let random = dict["_random"] as? UInt32
             self.randomNumber = random!
-            print(self.randomNumber)
             UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
         }
- 
     }
     
     
@@ -125,21 +131,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 for child in snapshots {
                     let childSnapshot = snapshot.childSnapshot(forPath: child.key)
                     if let dbLocation = childSnapshot.value {
-                        print(dbLocation as! UInt32)
                         let dbIntLocation = dbLocation as! UInt32
-                        print("Int value", dbIntLocation)
                         if dbIntLocation == self.randomNumber {
-                            print("true. Number is in Used Figures. Call another number")
                             reference.child("_usedFigures").child(child.key).removeValue()
                             self.generateRandomNumber()
                         } else {
-                            print("false. Number is not in Used Figures")
                         }
                     }
                 }
             }
             reference.child("_usedFigures").childByAutoId().setValue(self.randomNumber)
-            print("false it does not exist in here")
             UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
             reference.child("_random").setValue(self.randomNumber)
         }
@@ -147,6 +148,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @objc(applicationReceivedRemoteMessage:) func application(received remoteMessage: MessagingRemoteMessage) {
         print("Remote message app data: ", remoteMessage.appData)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        let reference = Database.database().reference()
+        reference.child("_deviceToken").childByAutoId().setValue(fcmToken)
+        UserDefaults.standard.set(fcmToken, forKey: "deviceToken")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification:

@@ -1,5 +1,4 @@
 const functions = require('firebase-functions');
-
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
@@ -43,26 +42,29 @@ exports.makeRandomFigures = functions.https.onRequest((req, res) => {
 });
 
 exports.sendFigureNotification = functions.database.ref('_random').onWrite(event => {
-console.log('We have a new Figure of the Day');
+    console.log('We have a new Figure of the Day');
 
-// const data = event.data.current.val();
-    console.log('Power event triggered');
-    
-    // const status = data;
-// const onOff =  status ? "on": "off";
-
-const payload = {
+    const payload = {
         notification: {
             title: 'Historical Black Figure of the Day',
             body: `Test`,
-            sound: 'default'
+            badge: '1',
+            sound: 'default',
         }
     };
- 
+    
     const options = {
         priority: "high",
-        timeToLive: 60 * 60 * 24 //24 hours
-};
-console.log('Sending notifications');
-    return admin.messaging().sendToTopic('historicalBlackFigures', payload, options);
+        timeToLive: 60 * 60 * 24, //24 hours
+        content_available: true
+    };
+    console.log('Sending notifications');
+
+    // return admin.messaging().sendToDevice(registrationToken, payload, options)
+    return admin.database.ref(_deviceTokens).once('value').then(allToken => {
+        if (allToken.val()) {
+            const token = Object.keys(allToken.val());
+            return admin.messaging().sendToDevice(token, payload, options).then(response => {});
+        };
+    });
 });

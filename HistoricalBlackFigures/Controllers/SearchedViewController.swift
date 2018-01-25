@@ -54,7 +54,6 @@ class SearchedViewController: UIViewController {
     @objc func backPressed() {
         navigationController?.popViewController(animated: true)
         let randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
-        print(randomFigureIndex)
         UserDefaults.standard.setValue(figures[randomFigureIndex].figuresKey, forKey: "figureKey")
         hvc.viewWillAppear(true)
     }
@@ -65,7 +64,6 @@ class SearchedViewController: UIViewController {
         databaseReference.child("_random").observe(DataEventType.value, with: {
             (snapshot) in
             UserDefaults.standard.set(snapshot.value as! Int, forKey: "randomFigure")
-            print("Random Figure: ", snapshot.value as! Int)
             hvc.randomFigure = snapshot.value as! Int
         })
         databaseReference.observe(DataEventType.value, with: {
@@ -79,7 +77,6 @@ class SearchedViewController: UIViewController {
                     }
                 }
             }
-      
         })
     }
 }
