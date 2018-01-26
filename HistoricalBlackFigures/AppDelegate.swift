@@ -66,22 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes madeon entering the background.
-    UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        let reference = Database.database().reference()
-        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
-        print("Device Token: ", deviceToken!)
-        reference.child("_deviceToken").observe(DataEventType.value, with: {
-            (snapshot) in
-            if snapshot.hasChild(deviceToken!) {
-                snapshot.ref.child(snapshot.key).child(deviceToken!).removeValue()
-            }
-        })
     }
     
     func application(_ application: UIApplication, A deviceToken: Data) {
@@ -135,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         if dbIntLocation == self.randomNumber {
                             reference.child("_usedFigures").child(child.key).removeValue()
                             self.generateRandomNumber()
-                        } else {
                         }
                     }
                 }
@@ -152,8 +142,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         let reference = Database.database().reference()
-        reference.child("_deviceToken").childByAutoId().setValue(fcmToken)
-        UserDefaults.standard.set(fcmToken, forKey: "deviceToken")
+        
+        reference.child("_deviceToken").observeSingleEvent(of: DataEventType.value) { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for token in snapshots {
+                    let tokenSnapshot = snapshot.childSnapshot(forPath: token.key)
+                    if let deviceToken = tokenSnapshot.value {
+                        let tokenString = deviceToken as! String
+                        if tokenString == fcmToken {
+                            reference.child("_deviceToken").child(token.key).removeValue()
+                        }
+                    }
+                }
+            }
+            reference.child("_deviceToken").childByAutoId().setValue(fcmToken)
+            UserDefaults.standard.set(fcmToken, forKey: "deviceToken")
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification:
