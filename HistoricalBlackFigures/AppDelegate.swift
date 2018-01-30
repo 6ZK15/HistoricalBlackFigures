@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 options: authOptions,
                 completionHandler: {_, _ in })
             // For iOS 10 data message (sent via FCM
-            Messaging.messaging().remoteMessageDelegate = self
+            Messaging.messaging().delegate = self
+            Messaging.messaging().subscribe(toTopic: "HBF")
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
