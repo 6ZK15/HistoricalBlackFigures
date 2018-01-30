@@ -229,6 +229,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 lvc.subTitleText = cell.figures.figuresKey
                 let figureKey = cell.figures.figuresKey
                 lvc.bioText = cell.figures.lifeSummary
+                UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
                 UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
                 UserDefaults.standard.set(randomFigureIndex, forKey: "randomFigureIndex")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey

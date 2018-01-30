@@ -42,14 +42,13 @@ exports.makeRandomFigures = functions.https.onRequest((req, res) => {
 });
 
 exports.sendFigureNotification = functions.database.ref('_random').onWrite(event => {
-    console.log('We have a new Figure of the Day');
 
     const payload = {
         notification: {
-            title: 'Historical Black Figure of the Day',
-            body: `Test`,
+            title: 'Title',
+            body: `Test`, //use _random to get figure at index key
             badge: '1',
-            sound: 'default',
+            sound: 'default'
         }
     };
     
@@ -60,11 +59,5 @@ exports.sendFigureNotification = functions.database.ref('_random').onWrite(event
     };
     console.log('Sending notifications');
 
-    // return admin.messaging().sendToDevice(registrationToken, payload, options)
-    return admin.database.ref(_deviceTokens).once('value').then(allToken => {
-        if (allToken.val()) {
-            const token = Object.keys(allToken.val());
-            return admin.messaging().sendToDevice(token, payload, options).then(response => {});
-        };
-    });
+    return admin.messaging().sendToDevice(Object.keys(allToken.val()), payload, options)
 });
