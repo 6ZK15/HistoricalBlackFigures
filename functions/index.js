@@ -14,7 +14,7 @@ exports.makeRandomFigures = functions.https.onRequest((req, res) => {
     rootRef.once('value', (snapshot) => {
         doc_count_temp = snapshot.numChildren();
         //real number of member. if delete _timeStamp then minus 2 not 3!
-        var doc_count = doc_count_temp - 3;
+        var doc_count = doc_count_temp - 4;
 
         //get num array previous generated
         var xRef = rootRef.child("_usedFigures");
@@ -42,22 +42,37 @@ exports.makeRandomFigures = functions.https.onRequest((req, res) => {
 });
 
 exports.sendFigureNotification = functions.database.ref('_random').onWrite(event => {
+    var eventSnapshot = event.data.val(); 
+    var rootRef = admin.database().ref();
+    var array = [];
+    var fotd = "";
 
-    const payload = {
-        notification: {
-            title: 'Title',
-            body: `Test`, //use _random to get figure at index key
-            badge: '1',
-            sound: 'default'
-        }
-    };
-    
-    const options = {
-        priority: "high",
-        timeToLive: 60 * 60 * 24, //24 hours
-        content_available: true
-    };
-    console.log('Sending notifications');
+    rootRef.once('value', function(snap) {
+        snap.forEach(function(item) {
+            var figures = item.key;
+            array.push(figures);
+        });
+        fotd = String(array[eventSnapshot]);
+        console.log("FOTD: " + fotd);
 
-    return admin.messaging().sendToDevice(Object.keys(allToken.val()), payload, options)
+        const payload = {
+                notification: {
+                    title: 'Historical Black Figure of the Day',
+                    body: fotd,
+                    badge: '1',
+                    sound: 'default'
+                }
+            };
+            
+            const options = {
+              priority:"high",
+                timeToLive: 60 * 60 * 24, //24 hours
+                content_available: true
+            };
+        
+            const topic = "HBF";
+            console.log('Sending notifications');
+            return admin.messaging().sendToTopic(topic, payload, options);
+    });
+    return "success!";
 });

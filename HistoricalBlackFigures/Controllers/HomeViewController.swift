@@ -175,6 +175,8 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         searchController.searchBar.backgroundColor = UIColor.clear
         searchController.searchBar.keyboardAppearance = UIKeyboardAppearance.dark
         searchController.dimsBackgroundDuringPresentation = false
+        
+        searchTableView.isScrollEnabled = false
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -193,6 +195,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchTableView.isScrollEnabled = true
         containerView.alpha = 0
         gradientView.isHidden = false
         UIView.animate(withDuration: 0.5, animations: {
@@ -201,7 +204,12 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
         })
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchTableView.isScrollEnabled = false
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchTableView.isScrollEnabled = false
         searchController.isActive = false
         searchController.searchBar.isHidden = false
         containerView.alpha = 1

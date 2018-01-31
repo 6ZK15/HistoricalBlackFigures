@@ -161,6 +161,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().subscribe(toTopic: "HBF")
+        print("Register")
+        
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification:
         UNNotification, withCompletionHandler completionHandler:
         @escaping (UNNotificationPresentationOptions) -> Void) {
