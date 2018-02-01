@@ -26,6 +26,7 @@ class GalleryViewController: UIViewController {
     
     // Declare Variables
     var databaseReference: DatabaseReference!
+    var figureKey: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +48,13 @@ class GalleryViewController: UIViewController {
     
     func setHBFTitle() {
         databaseReference = Database.database().reference()
-        
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         subTitle.text = figureKey
     }
     

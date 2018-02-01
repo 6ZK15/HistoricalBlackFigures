@@ -46,10 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-        timestamp()
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3130282757948775~1462148695")
+        getRandomFigureIndex()
         
         return true
     }
@@ -76,37 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
     }
     
-    func application(_ application: UIApplication, A deviceToken: Data) {
-        if let token = InstanceID.instanceID().token() {
-            print("InstanceID token: \(token)")
-        }
-    }
-
-    func generateRandomNumber() {
+    func getRandomFigureIndex() {
         let reference = Database.database().reference()
-        reference.observe(DataEventType.value) { (snapshot) in
-            let childrenCount = snapshot.childrenCount - 4
-            self.randomNumber = arc4random_uniform(UInt32(childrenCount))
-        }
-        self.checkUsedFigures()
-    }
-    
-    func timestamp() {
-        let reference = Database.database().reference()
-        reference.observe(DataEventType.value) { (snapshot) in
-            let dict = snapshot.value as! NSDictionary
-            let timestamp = dict["_timeStamp"] as? String
-            let date = NSDate()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM-dd-yyyy"
-            formatter.timeZone = NSTimeZone(abbreviation: "CST")! as TimeZone
-            let defaultTimeZoneStr = formatter.string(from: date as Date)
-            print(defaultTimeZoneStr)
-            if timestamp != defaultTimeZoneStr {
-                reference.child("_timeStamp").setValue(defaultTimeZoneStr)
-                self.generateRandomNumber()
-            }
-        }
         reference.observe(DataEventType.value) { (snapshot) in
             let dict = snapshot.value as! NSDictionary
             let random = dict["_random"] as? UInt32
@@ -115,25 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    
-    func checkUsedFigures() {
-        let reference = Database.database().reference()
-        reference.child("_usedFigures").observeSingleEvent(of: DataEventType.value) { (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                for child in snapshots {
-                    let childSnapshot = snapshot.childSnapshot(forPath: child.key)
-                    if let dbLocation = childSnapshot.value {
-                        let dbIntLocation = dbLocation as! UInt32
-                        if dbIntLocation == self.randomNumber {
-                            reference.child("_usedFigures").child(child.key).removeValue()
-                            self.generateRandomNumber()
-                        }
-                    }
-                }
-            }
-            reference.child("_usedFigures").childByAutoId().setValue(self.randomNumber)
-            UserDefaults.standard.set(self.randomNumber, forKey: "randomFigureIndex")
-            reference.child("_random").setValue(self.randomNumber)
+    func application(_ application: UIApplication, A deviceToken: Data) {
+        if let token = InstanceID.instanceID().token() {
+            print("InstanceID token: \(token)")
         }
     }
     

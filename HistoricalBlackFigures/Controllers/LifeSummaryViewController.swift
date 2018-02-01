@@ -33,6 +33,7 @@ class LifeSummaryViewController: UIViewController {
     var subTitleText: String? = nil
     var bioText: String? = nil
     var isSearchedFigured = Bool()
+    var figureKey: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +55,26 @@ class LifeSummaryViewController: UIViewController {
     
     func setHBFTitle() {
         databaseReference = Database.database().reference()
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         subTitle.text = figureKey
     }
     
     func setBioTextView() {
         databaseReference = Database.database().reference()
-        let firgureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        databaseReference.child(firgureKey).child("lifeSummary").observe(DataEventType.value, with: {
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
+        databaseReference.child(figureKey!).child("lifeSummary").observe(DataEventType.value, with: {
             (snapshot) in
             self.bioTextView.text = snapshot.value as! String
         })

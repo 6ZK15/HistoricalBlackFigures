@@ -28,6 +28,7 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // Declare Variables
     var databaseReference: DatabaseReference!
+    var figureKey: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,17 +50,27 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func setHBFTitle() {
         databaseReference = Database.database().reference()
-        
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         subTitle.text = figureKey
     }
     
     func getFacts() {
         databaseReference = Database.database().reference()
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        
-        databaseReference.child(figureKey).observe(DataEventType.value, with: {
+        databaseReference.child(figureKey!).observe(DataEventType.value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
@@ -119,11 +130,17 @@ class FactsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+        
         databaseReference = Database.database().reference()
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        
-        databaseReference.child(figureKey).observe(DataEventType.value, with: {
+        databaseReference.child(figureKey!).observe(DataEventType.value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {

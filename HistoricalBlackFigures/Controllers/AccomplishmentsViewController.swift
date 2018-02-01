@@ -29,6 +29,7 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
     
     // Declare Variables
     var databaseReference: DatabaseReference!
+    var figureKey: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,13 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
     
     func setHBFTitle() {
         databaseReference = Database.database().reference()
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
         subTitle.text = figureKey
     }
     
@@ -129,9 +136,15 @@ class AccomplishmentsViewController: UIViewController, UITableViewDataSource, UI
         cell.textLabel?.lineBreakMode = .byWordWrapping
 
         cell.textLabel?.sizeToFit()
-        databaseReference = Database.database().reference()
-        let figureKey = UserDefaults.standard.string(forKey: "figureKey")!
-        databaseReference.child(figureKey).child("accomplishments").observeSingleEvent(of: DataEventType.value) { (snapshot) in
+        let viewControllers: [Any]? = navigationController?.viewControllers
+        if viewControllers?.count == 3 {
+            figureKey = UserDefaults.standard.string(forKey: "searchedFigureKey")!
+        }
+        else if viewControllers?.count == 2 {
+            figureKey = UserDefaults.standard.string(forKey: "figureKey")!
+        }
+        
+        databaseReference.child(figureKey!).child("accomplishments").observeSingleEvent(of: DataEventType.value) { (snapshot) in
             for child in (snapshot.children.allObjects as? [DataSnapshot])! {
                 let snap = child.value as! String
                 self.accomplishmentsArray.insert(snap, at: 0)

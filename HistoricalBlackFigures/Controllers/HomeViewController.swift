@@ -84,7 +84,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
             self.randomFigureIndex = UserDefaults.standard.integer(forKey: "randomFigureIndex")
             self.subTitle.text = self.figures[self.randomFigureIndex].figuresKey
             self.lifeSpan.text = self.figures[self.randomFigureIndex].lifeSpan
-            UserDefaults.standard.set(self.figures[self.self.randomFigureIndex].accomplishments.count, forKey: "numberOfAccomplishments")
+            UserDefaults.standard.set(self.figures[self.randomFigureIndex].accomplishments.count, forKey: "numberOfAccomplishments")
             UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureKey")
             UserDefaults.standard.setValue(self.figures[self.randomFigureIndex].figuresKey, forKey: "figureOfTheDay")
             self.checkUserSettings()
@@ -240,6 +240,7 @@ class HomeViewController: UIViewController, UISearchResultsUpdating, UISearchDis
                 UserDefaults.standard.setValue(figureKey, forKey: "figureKey")
                 UserDefaults.standard.set(filteredFigures[selectedRow!].accomplishments.count, forKey: "searchedNumberOfAccomplishments")
                 UserDefaults.standard.set(randomFigureIndex, forKey: "randomFigureIndex")
+                UserDefaults.standard.set(filteredFigures[selectedRow!].figuresKey, forKey: "searchedFigureKey")
                 svc.subTitleText = filteredFigures[selectedRow!].figuresKey
                 svc.lifeSpanText = filteredFigures[selectedRow!].lifeSpan
             }
