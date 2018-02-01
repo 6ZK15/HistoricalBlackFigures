@@ -14,7 +14,7 @@ exports.makeRandomFigures = functions.https.onRequest((req, res) => {
     rootRef.once('value', (snapshot) => {
         doc_count_temp = snapshot.numChildren();
         //real number of member. if delete _timeStamp then minus 2 not 3!
-        var doc_count = doc_count_temp - 4;
+        var doc_count = doc_count_temp - 3;
 
         //get num array previous generated
         var xRef = rootRef.child("_usedFigures");
