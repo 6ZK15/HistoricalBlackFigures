@@ -16,8 +16,10 @@ class SearchedViewController: UIViewController {
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var lifeSpan: UILabel!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var backBtnWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var backBtnHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerViewConstraint: NSLayoutConstraint!
     
     // Declare Classes
     var figuresOperations = FiguresOperation()
@@ -44,6 +46,15 @@ class SearchedViewController: UIViewController {
         backBtn.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let backButton = UIBarButtonItem(customView: backBtn)
         navigationItem.leftBarButtonItem = backButton
+        
+        let mainScreenHeight: Int = Int(UIScreen.main.bounds.size.height)
+        let mainScreenWidth: Int = Int(UIScreen.main.bounds.size.width)
+        if (mainScreenHeight == 480) && (mainScreenWidth == 320) {
+            print("iPad 9.7 or iPad 10.5")
+            containerView.bounds.origin.y = containerView.bounds.origin.y + 30
+            containerView.frame.size.height = containerView.frame.size.height + 30
+            containerViewConstraint.constant = 40
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fVu-YY-i9P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fVu-YY-i9P">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="EuphemiaCAS.ttc">
-            <string>EuphemiaUCAS</string>
-            <string>EuphemiaUCAS-Bold</string>
-        </array>
         <array key="WRESTLEMANIA.ttf">
             <string>WRESTLEMANIA</string>
         </array>
@@ -196,6 +192,8 @@
                         <outlet property="backBtn" destination="pGz-Yv-6iH" id="som-SX-E9A"/>
                         <outlet property="backBtnHeightConstraint" destination="VZR-06-YKN" id="oFc-0R-aLz"/>
                         <outlet property="backBtnWidthConstraint" destination="xUJ-zU-j57" id="Suf-su-FHZ"/>
+                        <outlet property="containerView" destination="22c-KO-NRG" id="UHg-fh-5n7"/>
+                        <outlet property="containerViewConstraint" destination="siG-Sx-bxU" id="qNI-b3-aRI"/>
                         <outlet property="dateLabel" destination="T3h-kX-bjC" id="fhY-M9-LI2"/>
                         <outlet property="lifeSpan" destination="zuM-BY-DwD" id="6ue-Dq-naP"/>
                         <outlet property="subTitle" destination="VBq-TL-97s" id="Aq1-2L-SS8"/>

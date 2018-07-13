@@ -887,7 +887,6 @@
 				CODE_SIGN_ENTITLEMENTS = HistoricalBlackFigures/HistoricalBlackFigures.entitlements;
 				DEVELOPMENT_TEAM = TJ9QMXW52J;
 				INFOPLIST_FILE = HistoricalBlackFigures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hd2technology.HBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -905,7 +904,6 @@
 				CODE_SIGN_ENTITLEMENTS = HistoricalBlackFigures/HistoricalBlackFigures.entitlements;
 				DEVELOPMENT_TEAM = TJ9QMXW52J;
 				INFOPLIST_FILE = HistoricalBlackFigures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hd2technology.HBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
